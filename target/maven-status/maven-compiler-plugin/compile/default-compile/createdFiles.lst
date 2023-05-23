@@ -1,0 +1,7 @@
+com\example\demo\controllers\UsuarioController.class
+com\example\demo\repository\UsuarioRepository.class
+com\example\demo\service\UsuarioServiceImpl.class
+com\example\demo\entity\Usuario.class
+com\example\demo\entity\UsuarioPk.class
+com\example\demo\service\UsuarioService.class
+com\example\demo\StoreApplication.class
