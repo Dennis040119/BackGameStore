@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -9,9 +10,10 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "Videojuego")
-public class VideoJuego {
+public class Videojuego {
 	@Id
 	private int id;
+	@Column(name = "nombre")
 	private String nombre;
 	private double precio;
 	private String color;
@@ -26,7 +28,7 @@ public class VideoJuego {
 	
 	
 	
-	public VideoJuego() {
+	public Videojuego() {
 		super();
 	}
 
@@ -34,7 +36,7 @@ public class VideoJuego {
 
 
 
-	public VideoJuego(int id, String nombre, double precio, String color, String descripcion, Plataforma plataforma1,
+	public Videojuego(int id, String nombre, double precio, String color, String descripcion, Plataforma plataforma1,
 			Plataforma plataforma2, Plataforma plataforma3, Rol rol, String img) {
 		super();
 		this.id = id;
