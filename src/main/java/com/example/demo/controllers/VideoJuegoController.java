@@ -55,7 +55,7 @@ public class VideoJuegoController {
 		//CREAMOS UN MAP, QUE ALMACENARA LOS MENSAJES DE EXITOS O ERRORES
 		Map<String, Object> salida = new HashMap<>();
 		//Intentamos la transaccion
-		if((service.buscarPorNombre(obj.getNombre())).size()== 0  ) {
+		if((service.buscarPorNombre(obj.getNombre())).size()> 0  ) {
 			
 			salida.put("mensaje", "Ya existe el videojuego");
 			
