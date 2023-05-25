@@ -29,13 +29,13 @@ descripcion varchar(100),
 plataforma1 varchar(20),
 plataforma2 varchar(20),
 plataforma3 varchar(20),
-rol char not null,
+rol char(2) not null,
 img varchar(255) not null
 );
 insert into Videojuego values (0,'Gears of war 2',20.99,'#E36464','odsauhfodsiuhfkhdasofhdsofhsoiahfoaihfoiash','xbox 360','','','v','../../assets/GearsOfWar2.jpg');
 insert into Videojuego values (0,'Infinity',15.99,'lightgreen','odsauhfodsiuhfkhdasofhdsofhsoiahfoaihfoiash','xbox 360','play station 4','','v','../../assets/Destiny.jpg');
 
-
+Select * from Videojuego; 
 /*-------------------------------------------------------*/
 drop table if exists videoconsola;
 create table videoconsola(
