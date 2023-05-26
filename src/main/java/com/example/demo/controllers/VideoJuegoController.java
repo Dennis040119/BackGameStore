@@ -61,7 +61,7 @@ public class VideoJuegoController {
 			
 		}else {
 			try {
-				
+				System.out.print(service.buscarPorNombre(obj.getNombre()));
 				
 				obj.setId(0);
 				service.registrar(obj);

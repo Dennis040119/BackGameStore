@@ -17,7 +17,7 @@ PRIMARY KEY (`username`, `password`)
 insert into usuario values('user1','pass1','123@gmail.com','1234123412341234','jr algo 1234');
 insert into usuario values('user2','pass2','123@gmail.com','1234123412341234','jr algo 1234');
 insert into usuario values('user3','pass3','123@gmail.com','1234123412341234','jr algo 1234');
-
+Select * from usuario; 
 /*-------------------------------------------------------*/
 drop table if exists Videojuego;
 create table Videojuego(

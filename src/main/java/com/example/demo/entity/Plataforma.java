@@ -1,13 +1,24 @@
 package com.example.demo.entity;
 
-public enum Plataforma {
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
+import javax.persistence.Entity;
+
+import lombok.Data;
+
+@Data
+public class Plataforma {
 	
-	PLAY4("PlayStation 4",4,"Sony"),
+	/*PLAY4("PlayStation 4",4,"Sony"),
 	PLAY5("PlayStation 5",5,"Sony"),
 	XBOX360("Xbox 360",4,"Microsoft"),
 	XBOXONE("Xbox one",5,"Microsoft"),
 	PC("Pc",5,"Nvidia"),
-	NINTENDOSWITCH("Nintendo Switch ",5,"Nintendo");
+	NINTENDOSWITCH("Nintendo Switch ",5,"Nintendo");*/
 	
 	private String nombre;
 	private int generacion;
@@ -51,8 +62,35 @@ public enum Plataforma {
 	}
 	
 	
+	public static Set valores() {
+		
+		Plataforma PLAY4=new Plataforma("PlayStation 4",4,"Sony");
+		Plataforma PLAY5=new Plataforma("PlayStation 5",5,"Sony");
+		Plataforma XBOX360=new Plataforma("Xbox 360",4,"Microsoft");
+		Plataforma XBOXONE=new Plataforma("Xbox one",5,"Microsoft");
+		Plataforma PC=new Plataforma("Pc",5,"Nvidia");
+		Plataforma NINTENDOSWITCH=new Plataforma("Nintendo Switch",5,"Nintendo");
+		
+		
+		Set<Plataforma> plata = new HashSet<Plataforma>();
+		plata.add(PLAY4);
+		plata.add(PLAY5);
+		plata.add(XBOX360);
+		plata.add(XBOXONE);;
+		plata.add(PC);
+		plata.add(NINTENDOSWITCH);
+		
+		
+		
+		return plata;
+	}
 	
-	
+	/*PLAY4("PlayStation 4",4,"Sony"),
+	PLAY5("PlayStation 5",5,"Sony"),
+	XBOX360("Xbox 360",4,"Microsoft"),
+	XBOXONE("Xbox one",5,"Microsoft"),
+	PC("Pc",5,"Nvidia"),
+	NINTENDOSWITCH("Nintendo Switch ",5,"Nintendo");*/
 	
 
 }
