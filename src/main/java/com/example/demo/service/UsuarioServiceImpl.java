@@ -1,12 +1,13 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Usuario;
-import com.example.demo.entity.UsuarioPk;
+
 
 
 
@@ -21,23 +22,31 @@ public class UsuarioServiceImpl implements UsuarioService {
 		// TODO Auto-generated method stub
 		return repository.findAll();
 	}
+	
+	@Override
+	public Optional<Usuario> BuscarPorUser(String user) {
+		// TODO Auto-generated method stub
+		return repository.findbyUser(user);
+	}
 
 	@Override
 	public void save(Usuario Usuario) {
-		// TODO Auto-generated method stub
+		repository.save(Usuario);
 
 	}
 
 	@Override
-	public Usuario get(UsuarioPk id) {
+	public Usuario get(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void delete(UsuarioPk id) {
+	public void delete(int id) {
 		// TODO Auto-generated method stub
 
 	}
+
+	
 
 }
