@@ -10,9 +10,10 @@ import com.example.demo.entity.Usuario;
 public interface UsuarioService {
 	
 	public List<Usuario> listar();
+	public Optional<Usuario> buscar(int id);
 	public Optional<Usuario> BuscarPorUser(String id);
 	public void save(Usuario Usuario);
-	public Usuario get(int id);
+	
 	public void delete(int id);
 
 }

@@ -10,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -89,7 +91,7 @@ public class UsuarioController {
 	
 	@PostMapping("/usuarioSave")
 	@ResponseBody
-	public  ResponseEntity<Map<String, Object>> SaveVJ(@RequestBody Usuario obj) {
+	public  ResponseEntity<Map<String, Object>> SaveUser(@RequestBody Usuario obj) {
 		
 		//CREAMOS UN MAP, QUE ALMACENARA LOS MENSAJES DE EXITOS O ERRORES
 		Map<String, Object> salida = new HashMap<>();
@@ -106,10 +108,64 @@ public class UsuarioController {
 				String claveencryp=PassGenerator.CrearContra(obj.getPassword());
 				obj.setPassword(claveencryp);
 				obj.setId(0);
-				System.out.println(obj.toString());
+				
 				service.save(obj);
 				salida.put("mensaje", "Registrado usuario correctamente");
 			} catch (Exception e) {salida.put("mensaje", "Error al registrar: " +e);}
+		}
+		
+		
+		
+		return ResponseEntity.ok(salida);
+	}
+	
+	@PutMapping("/usuarioPut")
+	@ResponseBody
+	public  ResponseEntity<Map<String, Object>> ActualizarUser(@RequestBody Usuario obj) {
+		
+		//CREAMOS UN MAP, QUE ALMACENARA LOS MENSAJES DE EXITOS O ERRORES
+		Map<String, Object> salida = new HashMap<>();
+		//Intentamos la transaction
+		
+		Optional<Usuario> usu = service.BuscarPorUser(obj.getUser());
+		if(usu.isEmpty() ){
+			salida.put("mensaje", "No existe el Usuario");
+			
+		}else {
+			System.out.println("\n"+obj);
+			try {
+				
+				String claveencryp=PassGenerator.CrearContra(obj.getPassword());
+				obj.setPassword(claveencryp);
+				
+				System.out.println(obj.toString());
+				service.save(obj);
+				salida.put("mensaje", "Actualizado usuario correctamente");
+			} catch (Exception e) {salida.put("mensaje", "Error al Actualizar: " +e);}
+		}
+		
+		
+		
+		return ResponseEntity.ok(salida);
+	}
+	
+	@DeleteMapping("/UsuarioDelete/{id}")
+	@ResponseBody
+	public  ResponseEntity<Map<String, Object>> eliminarVJ(@PathVariable("id") int id) {
+		
+		//CREAMOS UN MAP, QUE ALMACENARA LOS MENSAJES DE EXITOS O ERRORES
+		Map<String, Object> salida = new HashMap<>();
+		//Intentamos la transaccion
+		
+		if(service.buscar(id).isPresent()== false  ) {
+			
+			salida.put("mensaje", "No existe el Usuario");
+			
+		}else {
+			try {
+				service.delete(id);
+				salida.put("mensaje", "Elimnado correctamente");
+			} catch (Exception e) {salida.put("mensaje", "Error al eliminar: " +service.buscar(id));}
 		}
 		
 		

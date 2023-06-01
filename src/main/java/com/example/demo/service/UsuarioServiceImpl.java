@@ -34,17 +34,16 @@ public class UsuarioServiceImpl implements UsuarioService {
 		repository.save(Usuario);
 
 	}
-
-	@Override
-	public Usuario get(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	@Override
 	public void delete(int id) {
 		// TODO Auto-generated method stub
+			repository.deleteById(id);
+	}
 
+	@Override
+	public Optional<Usuario> buscar(int id) {
+		// TODO Auto-generated method stub
+		return repository.findById(id);
 	}
 
 	
