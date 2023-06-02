@@ -2,7 +2,7 @@ drop database Gamestore;
 create database Gamestore;
 use Gamestore;
 
-
+SHOW FULL TABLES FROM Gamestore;
 
 drop table if exists usuario ;
 create table usuario(
