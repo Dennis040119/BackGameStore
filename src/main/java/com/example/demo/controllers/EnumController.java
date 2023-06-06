@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.entity.Genero;
 import com.example.demo.entity.Plataforma;
 import com.example.demo.entity.Videojuego;
+import com.example.demo.service.GeneroServiceImpl;
+import com.example.demo.service.PlataformasServiceImpl;
 import com.example.demo.service.VideoJuegoRepositoryImpl;
 
 @RestController
@@ -23,18 +26,39 @@ import com.example.demo.service.VideoJuegoRepositoryImpl;
 @CrossOrigin(origins = "http://localhost:4200")
 public class EnumController {
 	
+	@Autowired
+	private GeneroServiceImpl serviceGen;
 	
+	@Autowired
+	private PlataformasServiceImpl servicePlat;
 	
 	@GetMapping("/PlataformaList")
 	@ResponseBody
-	public ResponseEntity<Object> listaVJ() {
+	public ResponseEntity<Object> listaPlat() {
 		
 		try {
 			
-			Set<Plataforma> plataformas = Plataforma.valores();
+			List<Plataforma> plataformas = servicePlat.listar();
+			return ResponseEntity.ok(plataformas);
+		} catch (Exception e) {
+			
+			return ResponseEntity.ok(e);
+			
+		}
+		
+	}
+	
+	@GetMapping("/GeneroList")
+	@ResponseBody
+	public ResponseEntity<Object> listaGen() {
+		
+		try {
+			
+			List<Genero> generos = serviceGen.listar();
+			
 			
 
-			return ResponseEntity.ok(plataformas);
+			return ResponseEntity.ok(generos);
 		} catch (Exception e) {
 			
 			return ResponseEntity.ok(e);

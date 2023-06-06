@@ -7,29 +7,60 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 import lombok.Data;
 
-@Data
+
+@Entity
+@Table(name = "plataforma")
 public class Plataforma {
 	
-	/*PLAY4("PlayStation 4",4,"Sony"),
-	PLAY5("PlayStation 5",5,"Sony"),
-	XBOX360("Xbox 360",4,"Microsoft"),
-	XBOXONE("Xbox one",5,"Microsoft"),
-	PC("Pc",5,"Nvidia"),
-	NINTENDOSWITCH("Nintendo Switch ",5,"Nintendo");*/
-	
+	@Id
+	private String platId;
 	private String nombre;
 	private int generacion;
 	private String marca;
 	
 	
-	private Plataforma(String nombre, int generacion, String marca) {
+	
+	
+	
+	public Plataforma(String id, String nombre, int generacion, String marca) {
+		super();
+		this.platId = id;
 		this.nombre = nombre;
 		this.generacion = generacion;
 		this.marca = marca;
 	}
+
+	
+
+
+
+	public Plataforma() {
+		super();
+	}
+
+	
+
+
+
+	public String getId() {
+		return platId;
+	}
+
+
+
+
+
+	public void setId(String id) {
+		this.platId = id;
+	}
+
+
+
 
 
 	public String getNombre() {
@@ -37,9 +68,15 @@ public class Plataforma {
 	}
 
 
+
+
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+
+
 
 
 	public int getGeneracion() {
@@ -47,9 +84,15 @@ public class Plataforma {
 	}
 
 
+
+
+
 	public void setGeneracion(int generacion) {
 		this.generacion = generacion;
 	}
+
+
+
 
 
 	public String getMarca() {
@@ -57,33 +100,28 @@ public class Plataforma {
 	}
 
 
+
+
+
 	public void setMarca(String marca) {
 		this.marca = marca;
 	}
-	
-	
-	public static Set valores() {
-		
-		Plataforma PLAY4=new Plataforma("PlayStation 4",4,"Sony");
-		Plataforma PLAY5=new Plataforma("PlayStation 5",5,"Sony");
-		Plataforma XBOX360=new Plataforma("Xbox 360",4,"Microsoft");
-		Plataforma XBOXONE=new Plataforma("Xbox one",5,"Microsoft");
-		Plataforma PC=new Plataforma("Pc",5,"Nvidia");
-		Plataforma NINTENDOSWITCH=new Plataforma("Nintendo Switch",5,"Nintendo");
-		
-		
-		Set<Plataforma> plata = new HashSet<Plataforma>();
-		plata.add(PLAY4);
-		plata.add(PLAY5);
-		plata.add(XBOX360);
-		plata.add(XBOXONE);;
-		plata.add(PC);
-		plata.add(NINTENDOSWITCH);
-		
-		
-		
-		return plata;
+
+
+
+
+
+	@Override
+	public String toString() {
+		return "Plataforma [platId=" + platId + ", nombre=" + nombre + ", generacion=" + generacion + ", marca=" + marca
+				+ "]";
 	}
+
+
+	
+
+
+
 	
 	/*PLAY4("PlayStation 4",4,"Sony"),
 	PLAY5("PlayStation 5",5,"Sony"),

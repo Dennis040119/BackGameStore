@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.entity.Videojuego;
 
 
-public interface VideoJuegoRepository extends JpaRepository<Videojuego, Integer> {
+public interface VideoJuegoRepository extends JpaRepository<Videojuego, String> {
 
 	// Consulta
 	@Query("Select a from Videojuego a where a.nombre like :nombre")

@@ -9,10 +9,10 @@ import com.example.demo.entity.Videojuego;
 public interface VideoJuegoService {
 	
 	public List<Videojuego> listar();
-	public Optional<Videojuego> buscarPorId(int id);
-	List<Videojuego> buscarPorNombre(String id);
+	public Optional<Videojuego> buscarPorId(String id);
+	List<Videojuego> buscarPorNombre(String nombre);
 	public void registrar(Videojuego VideoJuego);
-	public void eliminar(int id);
+	public void eliminar(String id);
 	
 	
 }

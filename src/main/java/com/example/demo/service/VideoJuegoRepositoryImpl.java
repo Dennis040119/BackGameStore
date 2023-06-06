@@ -22,15 +22,15 @@ public class VideoJuegoRepositoryImpl implements VideoJuegoService {
 	}
 	
 	@Override
-	public Optional<Videojuego> buscarPorId(int id) {
+	public Optional<Videojuego> buscarPorId(String id) {
 		// TODO Auto-generated method stub
 		return repo.findById(id);
 	}
 	
 	@Override
-	public List<Videojuego> buscarPorNombre(String id) {
+	public List<Videojuego> buscarPorNombre(String nombre) {
 		// TODO Auto-generated method stub
-		return repo.BuscarVjPorNombre(id);
+		return repo.BuscarVjPorNombre(nombre);
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class VideoJuegoRepositoryImpl implements VideoJuegoService {
 	}
 
 	@Override
-	public void eliminar(int id) {
+	public void eliminar(String id) {
 		// TODO Auto-generated method stub
 		repo.deleteById(id);
 	}

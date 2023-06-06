@@ -1,8 +1,13 @@
 package com.example.demo.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -12,204 +17,128 @@ import lombok.Data;
 @Table(name = "Videojuego")
 public class Videojuego {
 	@Id
-	private int id;
+	private String vjid;
 	@Column(name = "nombre")
 	private String nombre;
 	private double precio;
-	private String color;
 	private String descripcion;
-	private String plataforma1;
-	private String plataforma2;
-	private String plataforma3;
+	
+	private String plataformas;
+	
+	@ManyToOne
+	@JoinColumn(name = "genero")
+	private Genero genero;
+	
 	private String rol;
 	private String img;
-	
-	
-	
-	
 	
 	public Videojuego() {
 		super();
 	}
 
-
-
-
-
-	public Videojuego(int id, String nombre, double precio, String color, String descripcion, Plataforma plataforma1,
-			Plataforma plataforma2, Plataforma plataforma3, Rol rol, String img) {
+	public Videojuego(String vjid, String nombre, double precio, String descripcion, String plataformas,
+			Genero genero, String rol, String img) {
 		super();
-		this.id = id;
+		this.vjid = vjid;
 		this.nombre = nombre;
 		this.precio = precio;
-		this.color = color;
 		this.descripcion = descripcion;
-		this.plataforma1 = plataforma1.getNombre();
-		this.plataforma2 = plataforma2.getMarca();
-		this.plataforma3 = plataforma3.getMarca();
-		this.rol = rol.getCodigo();
+		this.plataformas = plataformas;
+		this.genero = genero;
+		this.rol = rol;
 		this.img = img;
 	}
 
-
-
-
-
-	public int getId() {
-		return id;
+	public String getId() {
+		return vjid;
 	}
 
-
-
-
-
-	public void setId(int id) {
-		this.id = id;
+	public void setId(String vjid) {
+		this.vjid = vjid;
 	}
-
-
-
-
 
 	public String getNombre() {
 		return nombre;
 	}
 
-
-
-
-
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
-
-
-
 
 	public double getPrecio() {
 		return precio;
 	}
 
-
-
-
-
 	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
-
-
-
-
-
-	public String getColor() {
-		return color;
-	}
-
-
-
-
-
-	public void setColor(String color) {
-		this.color = color;
-	}
-
-
-
-
 
 	public String getDescripcion() {
 		return descripcion;
 	}
 
-
-
-
-
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
 
-
-
-
-
-	public String getPlataforma1() {
-		return plataforma1;
+	public String getPlataformas() {
+		return plataformas;
 	}
 
-
-
-
-
-	public void setPlataforma1(String plataforma1) {
-		this.plataforma1 = plataforma1;
+	public void setPlataformas(String plataformas) {
+		this.plataformas = plataformas;
 	}
 
-
-
-
-
-	public String getPlataforma2() {
-		return plataforma2;
+	public Genero getGenero() {
+		return genero;
 	}
 
-
-
-
-
-	public void setPlataforma2(String plataforma2) {
-		this.plataforma2 = plataforma2;
+	public void setGenero(Genero genero) {
+		this.genero = genero;
 	}
-
-
-
-
-
-	public String getPlataforma3() {
-		return plataforma3;
-	}
-
-
-
-
-
-	public void setPlataforma3(String plataforma3) {
-		this.plataforma3 = plataforma3;
-	}
-
-
-
-
 
 	public String getRol() {
 		return rol;
 	}
 
-
-
-
-
 	public void setRol(String rol) {
 		this.rol = rol;
 	}
-
-
-
-
 
 	public String getImg() {
 		return img;
 	}
 
-
-
-
-
 	public void setImg(String img) {
 		this.img = img;
 	}
+
+	@Override
+	public String toString() {
+		return "Videojuego [vjid=" + vjid + ", nombre=" + nombre + ", precio=" + precio + ", descripcion=" + descripcion
+				+ ", plataformas=" + plataformas + ", genero=" + genero.getNombre() + ", rol=" + rol + ", img=" + img + "]";
+	}
+	
+	
+	public  static String  generarcodigo(int nro) {
+			if(nro<9) {return "vj00"+(nro+1);}
+			if(nro>=9 && nro<99 ) {return "vj0"+(nro+1);}
+			if(nro>=99 && nro<999) {return "vj"+nro+1;}
+		return "";
+	}
+
+	
+
+	
+	
+	
+	
+	
+
+
+
+
+
 	
 	
 	

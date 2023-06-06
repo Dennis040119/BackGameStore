@@ -63,8 +63,9 @@ public class VideoJuegoController {
 			try {
 				System.out.print(service.buscarPorNombre(obj.getNombre()));
 				
-				obj.setId(0);
+				obj.setId(Videojuego.generarcodigo(service.listar().size()));
 				service.registrar(obj);
+				System.out.println(obj);
 				salida.put("mensaje", "Registrado correctamente");
 			} catch (Exception e) {salida.put("mensaje", "Error al registrar: " +e);}
 			}
@@ -92,6 +93,7 @@ public class VideoJuegoController {
 				obj.setRol(Rol.VIDEOJUEGO.getCodigo());  
 				
 				service.registrar(obj);
+				System.out.println(obj);
 				salida.put("mensaje", "Actualizado correctamente");
 			} catch (Exception e) {salida.put("mensaje", "Error al actualizar: " +e);}
 			}
@@ -104,7 +106,7 @@ public class VideoJuegoController {
 	
 	@DeleteMapping("/videoJuegoDelete/{id}")
 	@ResponseBody
-	public  ResponseEntity<Map<String, Object>> eliminarVJ(@PathVariable("id") int id) {
+	public  ResponseEntity<Map<String, Object>> eliminarVJ(@PathVariable("id") String id) {
 		
 		//CREAMOS UN MAP, QUE ALMACENARA LOS MENSAJES DE EXITOS O ERRORES
 		Map<String, Object> salida = new HashMap<>();
