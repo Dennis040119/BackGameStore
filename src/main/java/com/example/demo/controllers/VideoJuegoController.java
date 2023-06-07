@@ -1,9 +1,14 @@
 package com.example.demo.controllers;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.sql.SQLDataException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +37,8 @@ public class VideoJuegoController {
 	
 	@Autowired
 	private VideoJuegoRepositoryImpl service;
+	
+	File file;
 	
 	@GetMapping("/videoJuegoList")
 	@ResponseBody
@@ -68,6 +75,7 @@ public class VideoJuegoController {
 				System.out.println(obj);
 				salida.put("mensaje", "Registrado correctamente");
 			} catch (Exception e) {salida.put("mensaje", "Error al registrar: " +e);}
+			 
 			}
 		
 		

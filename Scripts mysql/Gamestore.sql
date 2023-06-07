@@ -19,24 +19,7 @@ insert into usuario values(0,'user1','pass1','123@gmail.com','1234123412341234',
 insert into usuario values(0,'user2','pass2','123@gmail.com','1234123412341234','jr algo 1234','usua');
 Select * from usuario; 
 /*-------------------------------------------------------*/
-drop table if exists Videojuego;
-create table Videojuego(
-vjid varchar(5) primary key,
-nombre varchar(20) not null,
-precio double not null,
-descripcion varchar(100),
-plataformas varchar(100) not null ,
-genero varchar(5),
-rol char(2) not null ,
-img varchar(255) not null,
 
-FOREIGN KEY (genero) REFERENCES genero(genId)
-);
-insert into Videojuego values ('vj001','Gears of war 2',20.99,'odsauhfodsiuhfkhdasofhdsofhsoiahfoaihfoiash','pf001,pf002','ge001','v','../../assets/GearsOfWar2.jpg');
-insert into Videojuego values ('vj002','Infinity',15.99,'odsauhfodsiuhfkhdasofhdsofhsoiahfoaihfoiash','pf001','ge001','v','../../assets/Destiny.jpg');
-
-Select * from Videojuego; 
-Select * from Videojuego where nombre like 'gears Of War 2'; 
 /*-------------------------------------------------------*/
 drop table if exists videoconsola;
 create table videoconsola(
@@ -97,4 +80,22 @@ insert into genero values ('ge002','Accion');
 
 select * from genero;
 
+/**********************************/
+drop table if exists Videojuego;
+create table Videojuego(
+vjid varchar(5) primary key,
+nombre varchar(20) not null,
+precio double not null,
+descripcion varchar(100),
+plataformas varchar(100) not null ,
+genero varchar(5),
+rol char(2) not null ,
+img varchar(255) not null,
 
+FOREIGN KEY (genero) REFERENCES genero(genId)
+);
+insert into Videojuego values ('vj001','Gears of war 2',20.99,'odsauhfodsiuhfkhdasofhdsofhsoiahfoaihfoiash','pf001,pf002','ge001','v','../../assets/GearsOfWar2.jpg');
+insert into Videojuego values ('vj002','Infinity',15.99,'odsauhfodsiuhfkhdasofhdsofhsoiahfoaihfoiash','pf001','ge001','v','../../assets/Destiny.jpg');
+
+Select * from Videojuego; 
+Select * from Videojuego where nombre like 'gears Of War 2'; 
