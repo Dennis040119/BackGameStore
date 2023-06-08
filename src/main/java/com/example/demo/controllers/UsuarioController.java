@@ -20,10 +20,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.entity.PassGenerator;
 import com.example.demo.entity.Usuario;
 
 import com.example.demo.entity.Videojuego;
+import com.example.demo.service.PassGenerator;
 import com.example.demo.service.UsuarioServiceImpl;
 
 
@@ -50,17 +50,23 @@ public class UsuarioController {
 	public List<Optional<Usuario>> usuarioxUser(@PathVariable("user") String user) {
 		
 		//encrypto
-	
-		
 		List<Optional<Usuario>> lista = new ArrayList<>();
-		
-		Optional<Usuario> usu = service.BuscarPorUser(user);
-		if(usu.isPresent()) {
-			lista.add(usu);
-			return lista ;
-		}else {
+		try {
+			
+			
+			Optional<Usuario> usu = service.BuscarPorUser(user);
+			if(usu.isPresent()) {
+				lista.add(usu);
+				return lista ;
+			}else {
+				return lista;
+			}
+		} catch (Exception e) {
+			
+			e.printStackTrace();
 			return lista;
 		}
+		
 		
 		
 	}
@@ -127,20 +133,30 @@ public class UsuarioController {
 		Map<String, Object> salida = new HashMap<>();
 		//Intentamos la transaction
 		
-		Optional<Usuario> usu = service.BuscarPorUser(obj.getUser());
-		if(usu.isEmpty() ){
+		Optional<Usuario> usu = service.buscar(obj.getId());
+		if(usu.isEmpty()){
 			salida.put("mensaje", "No existe el Usuario");
 			
 		}else {
-			System.out.println("\n"+obj);
+			
 			try {
+				String contra = obj.getPassword();
 				
-				String claveencryp=PassGenerator.CrearContra(obj.getPassword());
-				obj.setPassword(claveencryp);
+				if(usu.isPresent() ) {
+					
+				if(service.BuscarPorUser(obj.getUser()).isPresent() && obj.getUser()!= usu.get().getUser() ) {
+					System.out.println(obj.toString());
+					obj.setPassword(PassGenerator.CrearContra(obj.getPassword()));
+					service.save(obj);
+					salida.put("mensaje", "Actualizado usuario correctamente");
+				}else {salida.put("mensaje", "Username ya se encuentra en uso");}
 				
-				System.out.println(obj.toString());
-				service.save(obj);
-				salida.put("mensaje", "Actualizado usuario correctamente");
+					
+				}else {salida.put("mensaje", "Usuario no encontrado");}
+				//String claveencryp=PassGenerator.CrearContra(obj.getPassword());
+				//obj.setPassword(claveencryp);
+				
+				
 			} catch (Exception e) {salida.put("mensaje", "Error al Actualizar: " +e);}
 		}
 		
