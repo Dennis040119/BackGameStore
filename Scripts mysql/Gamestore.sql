@@ -7,7 +7,7 @@ SHOW FULL TABLES FROM Gamestore;
 drop table if exists usuario ;
 create table usuario(
 id int primary key auto_increment,
-username varchar(20) ,
+username varchar(20) unique ,
 password varchar(80) ,
 email varchar(20),
 tarjetaCredito varchar(16),
@@ -97,5 +97,5 @@ FOREIGN KEY (genero) REFERENCES genero(genId)
 insert into Videojuego values ('vj001','Gears of war 2',20.99,'odsauhfodsiuhfkhdasofhdsofhsoiahfoaihfoiash','pf001,pf002','ge001','v','../../assets/GearsOfWar2.jpg');
 insert into Videojuego values ('vj002','Infinity',15.99,'odsauhfodsiuhfkhdasofhdsofhsoiahfoaihfoiash','pf001','ge001','v','../../assets/Destiny.jpg');
 
-Select * from Videojuego; 
+Select c.vjid,c.nombre,c.precio,g.nombre as 'Genero',c.plataformas from Videojuego c inner join genero g on c.genero=g.genId ; 
 Select * from Videojuego where nombre like 'gears Of War 2'; 
