@@ -1,16 +1,12 @@
 package com.example.demo.controllers;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.sql.SQLDataException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
-import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,53 +21,68 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Rol;
+import com.example.demo.entity.Usuario;
+import com.example.demo.entity.VideoConsola;
 import com.example.demo.entity.Videojuego;
-import com.example.demo.service.VideoJuegoServiceImpl;
-import com.fasterxml.jackson.databind.introspect.TypeResolutionContext.Empty;
+import com.example.demo.service.UsuarioServiceImpl;
+import com.example.demo.service.VideoConsolaServiceImpl;
 
 @RestController
 @Controller
-@RequestMapping("/videojuego")
+@RequestMapping("/videoconsola")
 @CrossOrigin(origins = "http://localhost:4200")
-public class VideoJuegoController {
+public class VideoConsolaController {
 	
 	@Autowired
-	private VideoJuegoServiceImpl service;
+	private VideoConsolaServiceImpl service;
+
 	
-	File file;
-	
-	@GetMapping("/videoJuegoList")
+	@GetMapping("/vclist")
 	@ResponseBody
-	public ResponseEntity<Object> listaVJ() {
-		
-		try {
-			List<Videojuego> lista = service.listar();
-			return ResponseEntity.ok(lista);
-		} catch (Exception e) {
-			
-			return ResponseEntity.ok(e);
-			
-		}
-		
+	public ResponseEntity<List<VideoConsola>> listaVc() {
+		List<VideoConsola> lista = service.listar();
+		return ResponseEntity.ok(lista);
 	}
 	
-	@PostMapping("/videoJuegoSave")
+	
+	@GetMapping("/vcBuscar/{id}")
 	@ResponseBody
-	public  ResponseEntity<Map<String, Object>> SaveVJ(@RequestBody Videojuego obj) {
+	public List<Optional<VideoConsola>> VcXid(@PathVariable("id") String id) {
+		
+		//encrypto
+		List<Optional<VideoConsola>> lista = new ArrayList<>();
+		try {
+			
+			
+			Optional<VideoConsola> usu = service.buscar(id);
+			if(usu.isPresent()) {
+				lista.add(usu);
+				return lista ;
+			}else {return lista;}
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			return lista;
+			}
+		}
+	
+	@PostMapping("/VcSave")
+	@ResponseBody
+	public  ResponseEntity<Map<String, Object>> SaveVJ(@RequestBody VideoConsola obj) {
 		
 		//CREAMOS UN MAP, QUE ALMACENARA LOS MENSAJES DE EXITOS O ERRORES
 		Map<String, Object> salida = new HashMap<>();
 		//Intentamos la transaccion
-		if((service.buscarPorNombre(obj.getNombre())).size()> 0  ) {
+		if( (service.buscar(obj.getVcid())).isPresent()  ) {
 			
 			salida.put("mensaje", "Ya existe el videojuego");
 			
 		}else {
 			try {
-				System.out.print(service.buscarPorNombre(obj.getNombre()));
 				
-				obj.setId(Videojuego.generarcodigo(service.listar().size()));
-				service.registrar(obj);
+				
+				obj.setVcid(VideoConsola.generarcodigo(service.listar().size()));
+				service.save(obj);
 				System.out.println(obj);
 				salida.put("mensaje", "Registrado correctamente");
 			} catch (Exception e) {salida.put("mensaje", "Error al registrar: " +e);}
@@ -83,23 +94,22 @@ public class VideoJuegoController {
 		return ResponseEntity.ok(salida);
 	}
 	
-	
-	@PutMapping("/videoJuegoPut")
+	@PutMapping("/VcPut")
 	@ResponseBody
-	public  ResponseEntity<Map<String, Object>> PutVJ(@RequestBody Videojuego obj) {
+	public  ResponseEntity<Map<String, Object>> PutVJ(@RequestBody VideoConsola obj) {
 		
 		//CREAMOS UN MAP, QUE ALMACENARA LOS MENSAJES DE EXITOS O ERRORES
 		Map<String, Object> salida = new HashMap<>();
 		//Intentamos la transaccion
 		
-		if(service.buscarPorId(obj.getId())==null   ) {
+		if( (service.buscar(obj.getVcid())).isEmpty()  ) {
 			
-			salida.put("mensaje", "No existe el videojuego");
+			salida.put("mensaje", "No existe la VideoConsola");
 			
 		}else {
 			try {
-				obj.setRol(Rol.VIDEOJUEGO.getCodigo());  
-				service.registrar(obj);
+				obj.setRol(Rol.VIDEOCONSOLA.getCodigo());  
+				service.save(obj);
 				System.out.println(obj);
 				salida.put("mensaje", "Actualizado correctamente");
 			} catch (Exception e) {salida.put("mensaje", "Error al actualizar: " +e);}
@@ -110,8 +120,7 @@ public class VideoJuegoController {
 		return ResponseEntity.ok(salida);
 	}
 	
-	
-	@DeleteMapping("/videoJuegoDelete/{id}")
+	@DeleteMapping("/VcDelete/{id}")
 	@ResponseBody
 	public  ResponseEntity<Map<String, Object>> eliminarVJ(@PathVariable("id") String id) {
 		
@@ -119,20 +128,19 @@ public class VideoJuegoController {
 		Map<String, Object> salida = new HashMap<>();
 		//Intentamos la transaccion
 		
-		if(service.buscarPorId(id).isPresent()== false  ) {
+		if(  (service.buscar(id)).isEmpty()  ) {
 			
-			salida.put("mensaje", "No existe el videojuego");
+			salida.put("mensaje", "No existe la VideoConsola");
 			
 		}else {
 			try {
-				service.eliminar(id);
+				service.delete(id);
 				salida.put("mensaje", "Elimnado correctamente");
-			} catch (Exception e) {salida.put("mensaje", "Error al eliminar: " +service.buscarPorId(id));}
+			} catch (Exception e) {salida.put("mensaje", "Error al eliminar: " +service.buscar(id));}
 		}
 		
 		
 		
 		return ResponseEntity.ok(salida);
 	}
-
 }

@@ -23,14 +23,21 @@ Select * from usuario;
 /*-------------------------------------------------------*/
 drop table if exists videoconsola;
 create table videoconsola(
-id varchar(20) primary key,
-nombre varchar(20),
-precio double,
+vcid varchar(20) primary key,
+nombre varchar(50) not null,
+plataforma  varchar(5) not null,
+precio double not null,
 descripcion varchar(50),
 marca varchar(20),
-img varchar(100)
-);
+rol varchar(2),
+img varchar(100),
 
+FOREIGN KEY (plataforma) REFERENCES plataforma(platId)
+);
+insert into videoconsola values('vc001','PlayStation4','pf004',1200,'','Sony','vc','');
+insert into videoconsola values('vc002','PlayStation5','pf003',1600,'','Sony','vc','');
+
+select*from videoconsola;
 /*-------------------------------------------------------*/
 drop table if exists computadora;
 create table computadora(
@@ -40,6 +47,7 @@ precio double,
 descripcion varchar(50),
 funcion varchar(15),
 marca varchar(20),
+rol varchar(2),
 img varchar(100)
 );
 
@@ -66,6 +74,7 @@ insert into plataforma values ('pf000','',0,'');
 insert into plataforma values ('pf001','Xbox 360',4,'MicroSoft');
 insert into plataforma values ('pf002','Xbox One',5,'MicroSoft');
 insert into plataforma values ('pf003','PlayStation 5',5,'Sony');
+insert into plataforma values ('pf004','PlayStation 4',4,'Sony');
 
 select * from plataforma;
 /************************************************************/
@@ -94,8 +103,8 @@ img varchar(255) not null,
 
 FOREIGN KEY (genero) REFERENCES genero(genId)
 );
-insert into Videojuego values ('vj001','Gears of war 2',20.99,'odsauhfodsiuhfkhdasofhdsofhsoiahfoaihfoiash','pf001,pf002','ge001','v','../../assets/GearsOfWar2.jpg');
-insert into Videojuego values ('vj002','Infinity',15.99,'odsauhfodsiuhfkhdasofhdsofhsoiahfoaihfoiash','pf001','ge001','v','../../assets/Destiny.jpg');
+insert into Videojuego values ('vj001','Gears of war 2',20.99,'odsauhfodsiuhfkhdasofhdsofhsoiahfoaihfoiash','pf001,pf002','ge001','vj','../../assets/GearsOfWar2.jpg');
+insert into Videojuego values ('vj002','Infinity',15.99,'odsauhfodsiuhfkhdasofhdsofhsoiahfoaihfoiash','pf001','ge001','vj','../../assets/Destiny.jpg');
 
 Select c.vjid,c.nombre,c.precio,g.nombre as 'Genero',c.plataformas from Videojuego c inner join genero g on c.genero=g.genId ; 
 Select * from Videojuego where nombre like 'gears Of War 2'; 

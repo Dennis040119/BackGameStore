@@ -2,9 +2,10 @@ package com.example.demo.entity;
 
 public enum Rol {
 
-	VIDEOJUEGO("v"),
-	CONSOLA("c"),
-	ACCESORIO("a");
+	VIDEOJUEGO("vj"),
+	VIDEOCONSOLA("vc"),
+	ACCESORIO("ac");
+	
 	
 	private String codigo;
 

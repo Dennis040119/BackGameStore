@@ -10,7 +10,7 @@ import com.example.demo.entity.Videojuego;
 import com.example.demo.repository.VideoJuegoRepository;
 
 @Service
-public class VideoJuegoRepositoryImpl implements VideoJuegoService {
+public class VideoJuegoServiceImpl implements VideoJuegoService {
 
 	@Autowired
 	private VideoJuegoRepository repo;
