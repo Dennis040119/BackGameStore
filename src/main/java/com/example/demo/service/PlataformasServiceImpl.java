@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.entity.Plataforma;
+import com.example.demo.entity.enums.Plataforma;
 @Service
 public class PlataformasServiceImpl implements PlaformasService {
 	

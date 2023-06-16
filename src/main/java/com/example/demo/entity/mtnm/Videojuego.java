@@ -1,4 +1,4 @@
-package com.example.demo.entity;
+package com.example.demo.entity.mtnm;
 
 import java.util.List;
 
@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.example.demo.entity.enums.Genero;
 
 import lombok.Data;
 

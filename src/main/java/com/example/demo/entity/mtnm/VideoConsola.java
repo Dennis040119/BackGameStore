@@ -1,10 +1,12 @@
-package com.example.demo.entity;
+package com.example.demo.entity.mtnm;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.example.demo.entity.enums.Plataforma;
 
 @Entity
 @Table(name = "videoconsola")
@@ -145,7 +147,7 @@ public class VideoConsola {
 	
 	@Override
 	public String toString() {
-		return "VideoConsola [vcid=" + vcid + ", nombre=" + nombre + ", plataforma=" + plataforma.getNombre() + ", precio=" + precio
+		return "VideoConsola [vcid=" + vcid + ", nombre=" + nombre + ", plataforma=" + plataforma + ", precio=" + precio
 				+ ", descripcion=" + descripcion + ", marca=" + marca + ", rol=" + rol + ", img=" + img + "]";
 	}
 

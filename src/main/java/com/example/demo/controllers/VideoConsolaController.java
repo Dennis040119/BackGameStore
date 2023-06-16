@@ -1,10 +1,14 @@
 package com.example.demo.controllers;
 
+import java.awt.Dialog;
+import java.awt.Window;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import javax.swing.JOptionPane;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,10 +24,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.entity.Rol;
-import com.example.demo.entity.Usuario;
-import com.example.demo.entity.VideoConsola;
-import com.example.demo.entity.Videojuego;
+import com.example.demo.entity.enums.Rol;
+import com.example.demo.entity.mtnm.Usuario;
+import com.example.demo.entity.mtnm.VideoConsola;
+import com.example.demo.entity.mtnm.Videojuego;
 import com.example.demo.service.UsuarioServiceImpl;
 import com.example.demo.service.VideoConsolaServiceImpl;
 
@@ -82,8 +86,11 @@ public class VideoConsolaController {
 				
 				
 				obj.setVcid(VideoConsola.generarcodigo(service.listar().size()));
+				
+				System.out.println(obj.toString());
 				service.save(obj);
-				System.out.println(obj);
+				
+				
 				salida.put("mensaje", "Registrado correctamente");
 			} catch (Exception e) {salida.put("mensaje", "Error al registrar: " +e);}
 			 
@@ -109,8 +116,9 @@ public class VideoConsolaController {
 		}else {
 			try {
 				obj.setRol(Rol.VIDEOCONSOLA.getCodigo());  
+				System.out.println(obj.toString());
 				service.save(obj);
-				System.out.println(obj);
+				
 				salida.put("mensaje", "Actualizado correctamente");
 			} catch (Exception e) {salida.put("mensaje", "Error al actualizar: " +e);}
 			}
@@ -134,6 +142,7 @@ public class VideoConsolaController {
 			
 		}else {
 			try {
+				
 				service.delete(id);
 				salida.put("mensaje", "Elimnado correctamente");
 			} catch (Exception e) {salida.put("mensaje", "Error al eliminar: " +service.buscar(id));}

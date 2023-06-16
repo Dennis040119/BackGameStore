@@ -6,7 +6,7 @@ SHOW FULL TABLES FROM Gamestore;
 
 drop table if exists usuario ;
 create table usuario(
-id int primary key auto_increment,
+userid varchar(5) primary key,
 username varchar(20) unique ,
 password varchar(80) ,
 email varchar(20),
@@ -15,8 +15,8 @@ direccion varchar(100),
 rol varchar(6)
 );
 
-insert into usuario values(0,'user1','pass1','123@gmail.com','1234123412341234','jr algo 1234','admin');
-insert into usuario values(0,'user2','pass2','123@gmail.com','1234123412341234','jr algo 1234','usua');
+insert into usuario values('us001','user1','pass1','123@gmail.com','1234123412341234','jr algo 1234','admin');
+insert into usuario values('us002','user2','pass2','123@gmail.com','1234123412341234','jr algo 1234','user');
 Select * from usuario; 
 /*-------------------------------------------------------*/
 
@@ -76,6 +76,10 @@ insert into plataforma values ('pf002','Xbox One',5,'MicroSoft');
 insert into plataforma values ('pf003','PlayStation 5',5,'Sony');
 insert into plataforma values ('pf004','PlayStation 4',4,'Sony');
 
+insert into plataforma values ('pf005','Nintendo Wii',4,'Nintendo');
+insert into plataforma values ('pf006','Antiguos',2,'Nintendo');
+insert into plataforma values ('pf007','otros',4,'Sony');
+
 select * from plataforma;
 /************************************************************/
 drop table if exists genero ;
@@ -108,3 +112,36 @@ insert into Videojuego values ('vj002','Infinity',15.99,'odsauhfodsiuhfkhdasofhd
 
 Select c.vjid,c.nombre,c.precio,g.nombre as 'Genero',c.plataformas from Videojuego c inner join genero g on c.genero=g.genId ; 
 Select * from Videojuego where nombre like 'gears Of War 2'; 
+/**********************************************************/
+drop table if exists Venta;
+create table Venta(
+
+venId varchar(5) primary key,
+usuario varchar(20) not null,
+total double not null,
+direccion double not null,
+rol char(2) not null ,
+fCompra date not null,
+fEntrega date not null,
+FOREIGN KEY (usuario) REFERENCES usuario(userid)
+);
+
+select * from Venta;
+
+
+/**********************************************************/
+drop table if exists ProductosVenta;
+create table ProductosVenta(
+venId varchar(5) ,
+proId varchar(5) ,
+nombre varchar(20) not null,
+precio double not null,
+cantidad double not null,
+rol char(2) not null ,
+img varchar(255) not null,
+
+ PRIMARY KEY(venId,proId)
+);
+
+select * from ProductosVenta;
+insert into ProductosVenta values();

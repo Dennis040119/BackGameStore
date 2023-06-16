@@ -1,4 +1,4 @@
-package com.example.demo.entity;
+package com.example.demo.entity.enums;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -27,9 +27,9 @@ public class Plataforma {
 	
 	
 	
-	public Plataforma(String id, String nombre, int generacion, String marca) {
+	public Plataforma(String platId, String nombre, int generacion, String marca) {
 		super();
-		this.platId = id;
+		this.platId = platId;
 		this.nombre = nombre;
 		this.generacion = generacion;
 		this.marca = marca;
@@ -47,7 +47,13 @@ public class Plataforma {
 
 
 
-	public String getId() {
+	
+
+
+
+
+
+	public String getPlatId() {
 		return platId;
 	}
 
@@ -55,8 +61,8 @@ public class Plataforma {
 
 
 
-	public void setId(String id) {
-		this.platId = id;
+	public void setPlatId(String platId) {
+		this.platId = platId;
 	}
 
 

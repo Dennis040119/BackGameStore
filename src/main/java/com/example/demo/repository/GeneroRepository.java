@@ -2,8 +2,8 @@ package com.example.demo.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.example.demo.entity.Genero;
-import com.example.demo.entity.Plataforma;
+import com.example.demo.entity.enums.Genero;
+import com.example.demo.entity.enums.Plataforma;
 
 public interface GeneroRepository extends JpaRepository<Genero, String> {
 

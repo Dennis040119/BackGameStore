@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.entity.Usuario;
+import com.example.demo.entity.mtnm.Usuario;
 
 
 
@@ -35,13 +35,13 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	}
 	@Override
-	public void delete(int id) {
+	public void delete(String id) {
 		// TODO Auto-generated method stub
 			repository.deleteById(id);
 	}
 
 	@Override
-	public Optional<Usuario> buscar(int id) {
+	public Optional<Usuario> buscar(String id) {
 		// TODO Auto-generated method stub
 		return repository.findById(id);
 	}

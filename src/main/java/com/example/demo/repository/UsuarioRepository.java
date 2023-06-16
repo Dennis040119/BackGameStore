@@ -7,10 +7,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.entity.Usuario;
+import com.example.demo.entity.mtnm.Usuario;
 
 @Repository
-public interface UsuarioRepository extends JpaRepository<Usuario,Integer> {
+public interface UsuarioRepository extends JpaRepository<Usuario,String> {
 
 	@Query("from Usuario t where t.user = :user")
 	public Optional<Usuario> findbyUser(@Param("user")String user);

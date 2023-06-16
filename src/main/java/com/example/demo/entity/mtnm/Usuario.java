@@ -1,4 +1,4 @@
-package com.example.demo.entity;
+package com.example.demo.entity.mtnm;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -16,7 +16,7 @@ import lombok.Data;
 public class Usuario {
 
 	@Id
-	private int id;
+	private String userid;
 	@Column(name = "username")
 	private String user;
 	
@@ -26,10 +26,10 @@ public class Usuario {
 	private String tarjetaCredito;
 	private String direccion;
 	private String rol;
-	public Usuario(int id, String user, String password, String email, String tarjetaCredito, String direccion,
+	public Usuario(String userid, String user, String password, String email, String tarjetaCredito, String direccion,
 			String rol) {
 		super();
-		this.id = id;
+		this.userid = userid;
 		this.user = user;
 		this.password = password;
 		this.email = email;
@@ -40,12 +40,15 @@ public class Usuario {
 	public Usuario() {
 		super();
 	}
-	public int getId() {
-		return id;
+	
+	public String getUserid() {
+		return userid;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
+
+	
 	public String getUser() {
 		return user;
 	}
@@ -82,16 +85,21 @@ public class Usuario {
 	public void setRol(String rol) {
 		this.rol = rol;
 	}
+	
+	
+	
+	
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", user=" + user + ", password=" + password + ", email=" + email
+		return "Usuario [userid=" + userid + ", user=" + user + ", password=" + password + ", email=" + email
 				+ ", tarjetaCredito=" + tarjetaCredito + ", direccion=" + direccion + ", rol=" + rol + "]";
 	}
-	
-	
-	
-	
-	
+	public  static String  generarcodigo(int nro) {
+		if(nro<9) {return "us00"+(nro+1);}
+		if(nro>=9 && nro<99 ) {return "us0"+(nro+1);}
+		if(nro>=99 && nro<999) {return "us"+nro+1;}
+	return "";
+	}
 	
 	
 

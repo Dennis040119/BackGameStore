@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.entity.Genero;
-import com.example.demo.entity.Marca;
-import com.example.demo.entity.Plataforma;
+import com.example.demo.entity.enums.Genero;
+import com.example.demo.entity.enums.Marca;
+import com.example.demo.entity.enums.Plataforma;
 import com.example.demo.service.GeneroServiceImpl;
 import com.example.demo.service.PlataformasServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;

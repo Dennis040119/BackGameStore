@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.entity.Videojuego;
+import com.example.demo.entity.mtnm.Videojuego;
 
 
 public interface VideoJuegoRepository extends JpaRepository<Videojuego, String> {

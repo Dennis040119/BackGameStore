@@ -1,11 +1,14 @@
 package com.example.demo.controllers;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.hibernate.exception.spi.SQLExceptionConverterFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,9 +23,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.entity.Usuario;
-
-import com.example.demo.entity.Videojuego;
+import com.example.demo.entity.mtnm.Usuario;
+import com.example.demo.entity.mtnm.Videojuego;
 import com.example.demo.service.PassGenerator;
 import com.example.demo.service.UsuarioServiceImpl;
 
@@ -40,7 +42,7 @@ public class UsuarioController {
 	
 	@GetMapping("/usuarioList")
 	@ResponseBody
-	public ResponseEntity<List<Usuario>> listaAlumno() {
+	public ResponseEntity<List<Usuario>> listaUsuario() {
 		List<Usuario> lista = service.listar();
 		return ResponseEntity.ok(lista);
 	}
@@ -111,9 +113,10 @@ public class UsuarioController {
 			System.out.println("\n"+obj);
 			try {
 				
+				obj.setUserid(Usuario.generarcodigo(service.listar().size()));
 				String claveencryp=PassGenerator.CrearContra(obj.getPassword());
 				obj.setPassword(claveencryp);
-				obj.setId(0);
+				
 				
 				service.save(obj);
 				salida.put("mensaje", "Registrado usuario correctamente");
@@ -133,31 +136,47 @@ public class UsuarioController {
 		Map<String, Object> salida = new HashMap<>();
 		//Intentamos la transaction
 		
-		Optional<Usuario> usu = service.buscar(obj.getId());
+		Optional<Usuario> usu = service.buscar(obj.getUserid());
+		List<Usuario> listaUsuario=service.listar();
+		
+		
 		if(usu.isEmpty()){
 			salida.put("mensaje", "No existe el Usuario");
 			
 		}else {
 			
+			usu.get().setPassword(PassGenerator.CrearContra(obj.getPassword()));
+			listaUsuario.remove(usu.get());
+			
 			try {
-				String contra = obj.getPassword();
+				
+				
+				System.out.println("Segunda printa ----------------------------\n");
+				listaUsuario.stream().filter(user -> user.getUser().contains(obj.getUser())).forEach(System.out::println);//Sout 2
+				
+				
+				long num=listaUsuario.stream().filter(user -> user.getUser().contains(obj.getUser())).count();   
+				System.out.println("Numero printa ----------------------------\n");
+				System.out.println("El numero del stream es: "+num);
 				
 				if(usu.isPresent() ) {
 					
-				if(service.BuscarPorUser(obj.getUser()).isPresent() && obj.getUser()!= usu.get().getUser() ) {
-					System.out.println(obj.toString());
-					obj.setPassword(PassGenerator.CrearContra(obj.getPassword()));
-					service.save(obj);
-					salida.put("mensaje", "Actualizado usuario correctamente");
-				}else {salida.put("mensaje", "Username ya se encuentra en uso");}
+					if(num==0) {
+						System.out.println("El objeto a actulizar: "+obj);
+						System.out.println(obj.toString());
+						obj.setPassword(PassGenerator.CrearContra(obj.getPassword()));
+						service.save(obj);
+						salida.put("mensaje", "Actualizado usuario correctamente");
+					}else {salida.put("mensaje", "Username ya se encuentra en uso");}
 				
 					
-				}else {salida.put("mensaje", "Usuario no encontrado");}
+					}else {salida.put("mensaje", "Usuario no encontrado");}
 				//String claveencryp=PassGenerator.CrearContra(obj.getPassword());
 				//obj.setPassword(claveencryp);
 				
 				
-			} catch (Exception e) {salida.put("mensaje", "Error al Actualizar: " +e);}
+				} catch (Exception e) {salida.put("mensaje", "Error al Actualizar: " +e);}
+				
 		}
 		
 		
@@ -167,7 +186,7 @@ public class UsuarioController {
 	
 	@DeleteMapping("/UsuarioDelete/{id}")
 	@ResponseBody
-	public  ResponseEntity<Map<String, Object>> eliminarVJ(@PathVariable("id") int id) {
+	public  ResponseEntity<Map<String, Object>> eliminarVJ(@PathVariable("id") String id) {
 		
 		//CREAMOS UN MAP, QUE ALMACENARA LOS MENSAJES DE EXITOS O ERRORES
 		Map<String, Object> salida = new HashMap<>();

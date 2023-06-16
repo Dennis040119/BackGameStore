@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.entity.Rol;
-import com.example.demo.entity.Videojuego;
+import com.example.demo.entity.enums.Rol;
+import com.example.demo.entity.mtnm.Videojuego;
 import com.example.demo.service.VideoJuegoServiceImpl;
 import com.fasterxml.jackson.databind.introspect.TypeResolutionContext.Empty;
 
