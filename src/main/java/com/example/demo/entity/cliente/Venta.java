@@ -91,6 +91,11 @@ public class Venta {
 				+ ", rol=" + rol + ", fCompra=" + fCompra + ", fEntrega=" + fEntrega + "]";
 	}
 	
-	
+	public  static String  generarcodigo(int nro) {
+		if(nro<9) {return "vt00"+(nro+1);}
+		if(nro>=9 && nro<99 ) {return "vt0"+(nro+1);}
+		if(nro>=99 && nro<999) {return "vt"+nro+1;}
+	return "";
+	}
 
 }

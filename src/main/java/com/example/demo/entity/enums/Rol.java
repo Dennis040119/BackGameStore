@@ -4,7 +4,9 @@ public enum Rol {
 
 	VIDEOJUEGO("vj"),
 	VIDEOCONSOLA("vc"),
-	ACCESORIO("ac");
+	ACCESORIO("ac"),
+	VENTA("vt"),
+	PRODUCTO("pv");
 	
 	
 	private String codigo;
