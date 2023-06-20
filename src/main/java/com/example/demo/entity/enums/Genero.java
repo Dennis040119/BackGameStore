@@ -25,11 +25,13 @@ public class Genero {
 		this.nombre = nombre;
 	}
 	
-	public String getId() {
+	
+	
+	public String getGenId() {
 		return genId;
 	}
-	public void setId(String id) {
-		this.genId = id;
+	public void setGenId(String genId) {
+		this.genId = genId;
 	}
 	public String getNombre() {
 		return nombre;
@@ -37,7 +39,6 @@ public class Genero {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
 	@Override
 	public String toString() {
 		return "Genero [genId=" + genId + ", nombre=" + nombre + "]";

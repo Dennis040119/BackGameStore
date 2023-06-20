@@ -65,15 +65,17 @@ public class VentaController {
 	
 	@PostMapping("/VtSave")
 	@ResponseBody
-	public  ResponseEntity<Map<String, Object>> SaveVt(@RequestBody Venta obj) {
+	public  Venta SaveVt(@RequestBody Venta obj) {
 		
 		//CREAMOS UN MAP, QUE ALMACENARA LOS MENSAJES DE EXITOS O ERRORES
 		Map<String, Object> salida = new HashMap<>();
+		Venta objFail = new Venta();
+		objFail.setVenId("0000");
 		
 		//Intentamos la transaccion
 		if( (service.buscar(obj.getVenId()) ).isPresent()  ) {
 			
-			salida.put("mensaje", "Ya existe la venta");
+			return objFail;
 			
 		}else {
 			try {
@@ -89,12 +91,13 @@ public class VentaController {
 				obj.setfCompra(ldToDate(ld));
 				
 				service.registrar(obj);
-				
-				salida.put("mensaje", "Registrado correctamente");
-			} catch (Exception e) {salida.put("mensaje", "Error al registrar: " +e);}
+				return obj;
+				//salida.put("mensaje", "Registrado correctamente");
+			} catch (Exception e) {e.printStackTrace();return objFail;
+			}
 			 
 			}
-		return ResponseEntity.ok(salida);
+		
 	}
 	
 	@PutMapping("/VtPut")

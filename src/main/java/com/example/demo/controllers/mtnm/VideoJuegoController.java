@@ -1,16 +1,13 @@
 package com.example.demo.controllers.mtnm;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.sql.SQLDataException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
-import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,9 +22,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.enums.Rol;
+import com.example.demo.entity.mtnm.VideoConsola;
 import com.example.demo.entity.mtnm.Videojuego;
 import com.example.demo.service.mtnm.VideoJuegoServiceImpl;
-import com.fasterxml.jackson.databind.introspect.TypeResolutionContext.Empty;
 
 @RestController
 @Controller
@@ -55,6 +52,27 @@ public class VideoJuegoController {
 		
 	}
 	
+	@GetMapping("/vjBuscar/{id}")
+	@ResponseBody
+	public List<Optional<Videojuego>> VcXid(@PathVariable("id") String id) {
+		
+		//encrypto
+		List<Optional<Videojuego>> lista = new ArrayList<>();
+		try {
+			
+			
+			Optional<Videojuego> usu = service.buscarPorId(id);
+			if(usu.isPresent()) {
+				lista.add(usu);
+				return lista ;
+			}else {return lista;}
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			return lista;
+			}
+	}
+	
 	@PostMapping("/videoJuegoSave")
 	@ResponseBody
 	public  ResponseEntity<Map<String, Object>> SaveVJ(@RequestBody Videojuego obj) {
@@ -68,10 +86,12 @@ public class VideoJuegoController {
 			
 		}else {
 			try {
-				System.out.print(service.buscarPorNombre(obj.getNombre()));
+				
 				
 				obj.setId(Videojuego.generarcodigo(service.listar().size()));
+				obj.setRol(Rol.VIDEOJUEGO.getCodigo());
 				service.registrar(obj);
+				
 				System.out.println(obj);
 				salida.put("mensaje", "Registrado correctamente");
 			} catch (Exception e) {salida.put("mensaje", "Error al registrar: " +e);}

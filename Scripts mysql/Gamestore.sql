@@ -118,6 +118,10 @@ create table Venta(
 
 venId varchar(5) primary key,
 usuario varchar(20) not null,
+nombre varchar(100) not null,
+correo varchar(50) not null,
+movil varchar(9),
+tarjeta varchar(16),
 total double not null,
 direccion varchar(100) not null,
 rol char(2) not null ,
@@ -126,8 +130,9 @@ fEntrega date not null,
 FOREIGN KEY (usuario) REFERENCES usuario(userid)
 );
 SET TIME_ZONE='+00:00';
-insert into Venta values('vt001','us001','100','direcionventa1','vt','2023/06/19','2023/07/01');
-insert into Venta values('vt002','us001','100','direcionventa1','vt','2023/06/19','2023/07/01');
+insert into Venta values('vt001','us001',"Jose jose","correo@gmail.com","999888777","1111444433332222",100,'direcionventa1','vt','2023/06/19','2023/07/01');
+insert into Venta values('vt002','us001',"Jose maria","correo@gmail.com","999888777","1111444433332222",100,'direcionventa1','vt','2023/06/19','2023/07/01');
+
 select * from Venta;
 
 
@@ -145,7 +150,7 @@ img varchar(255) not null,
  PRIMARY KEY(venId,proId)
 );
 
-select * from ProductosVenta where venId='vt001';
+select * from ProductosVenta where venId='vt004';
 insert into ProductosVenta values('vt001','vj001','prodcut1',20.99,2,'pv','urlimagen');
 insert into ProductosVenta values('vt001','vj002','prodcut1',20.99,2,'pv','urlimagen');
 
