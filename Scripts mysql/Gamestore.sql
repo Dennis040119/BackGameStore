@@ -90,6 +90,11 @@ nombre varchar(20)
 insert into genero values ('ge000','');
 insert into genero values ('ge001','Terror');
 insert into genero values ('ge002','Accion');
+insert into genero values ('ge003','Shooter');
+insert into genero values ('ge004','Plataforma');
+insert into genero values ('ge005','Rpg');
+
+
 
 select * from genero;
 
