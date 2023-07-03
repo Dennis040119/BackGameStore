@@ -24,6 +24,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 	
 	@Override
+	public List<Usuario> listarActivos() {
+		// TODO Auto-generated method stub
+		return repository.ListarUsuariosActivos();
+	}
+	
+	@Override
 	public Optional<Usuario> BuscarPorUser(String user) {
 		// TODO Auto-generated method stub
 		return repository.findbyUser(user);
@@ -37,7 +43,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public void delete(String id) {
 		// TODO Auto-generated method stub
-			repository.deleteById(id);
+			repository.eliminarUsuario(id);
 	}
 
 	@Override

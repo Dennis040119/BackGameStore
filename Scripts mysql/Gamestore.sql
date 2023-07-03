@@ -9,35 +9,19 @@ create table usuario(
 userid varchar(5) primary key,
 username varchar(20) unique ,
 password varchar(80) ,
-email varchar(20),
+email varchar(80),
 tarjetaCredito varchar(16),
 direccion varchar(100),
-rol varchar(6)
+estado varchar(2) not null,
+rol varchar(6) not null
 );
 
-insert into usuario values('us001','user1','pass1','123@gmail.com','1234123412341234','jr algo 1234','admin');
-insert into usuario values('us002','user2','pass2','123@gmail.com','1234123412341234','jr algo 1234','user');
+insert into usuario values('us001','user1','pass1','123@gmail.com','1234123412341234','jr algo 1234','ac','admin');
+insert into usuario values('us002','user2','pass2','123@gmail.com','1234123412341234','jr algo 1234','ac','user');
 Select * from usuario; 
 /*-------------------------------------------------------*/
 
-/*-------------------------------------------------------*/
-drop table if exists videoconsola;
-create table videoconsola(
-vcid varchar(20) primary key,
-nombre varchar(50) not null,
-plataforma  varchar(5) not null,
-precio double not null,
-descripcion varchar(50),
-marca varchar(20),
-rol varchar(2),
-img varchar(100),
 
-FOREIGN KEY (plataforma) REFERENCES plataforma(platId)
-);
-insert into videoconsola values('vc001','PlayStation4','pf004',1200,'','Sony','vc','');
-insert into videoconsola values('vc002','PlayStation5','pf003',1600,'','Sony','vc','');
-
-select*from videoconsola;
 /*-------------------------------------------------------*/
 drop table if exists computadora;
 create table computadora(
@@ -164,3 +148,22 @@ insert into ProductosVenta values('vt002','vj002','prodcut1',20.99,2,'pv','urlim
 insert into ProductosVenta values('vt002','vj003','prodcut1',20.99,2,'pv','urlimagen');
 
 
+
+/*-------------------------------------------------------*/
+drop table if exists videoconsola;
+create table videoconsola(
+vcid varchar(20) primary key,
+nombre varchar(50) not null,
+plataforma  varchar(5) not null,
+precio double not null,
+descripcion varchar(50),
+marca varchar(20),
+rol varchar(2),
+img varchar(100),
+
+FOREIGN KEY (plataforma) REFERENCES plataforma(platId)
+);
+insert into videoconsola values('vc001','PlayStation4','pf004',1200,'','Sony','vc','');
+insert into videoconsola values('vc002','PlayStation5','pf003',1600,'','Sony','vc','');
+
+select*from videoconsola;

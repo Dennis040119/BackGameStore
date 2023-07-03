@@ -43,6 +43,13 @@ public class UsuarioController {
 		return ResponseEntity.ok(lista);
 	}
 	
+	@GetMapping("/usuarioAcList")
+	@ResponseBody
+	public ResponseEntity<List<Usuario>> listaUsuarioActivos() {
+		List<Usuario> lista = service.listarActivos();
+		return ResponseEntity.ok(lista);
+	}
+	
 	@GetMapping("/usuarioxUser/{user}")
 	@ResponseBody
 	public List<Optional<Usuario>> usuarioxUser(@PathVariable("user") String user) {
@@ -101,7 +108,7 @@ public class UsuarioController {
 		Map<String, Object> salida = new HashMap<>();
 		//Intentamos la transaction
 		
-		Optional<Usuario> usu = service.BuscarPorUser(obj.getUser());
+		Optional<Usuario> usu = service.BuscarPorUser(obj.getUsername());
 		if(usu.isPresent() ){
 			salida.put("mensaje", "Ya existe el Usuario");
 			
@@ -148,10 +155,10 @@ public class UsuarioController {
 				
 				
 				System.out.println("Segunda printa ----------------------------\n");
-				listaUsuario.stream().filter(user -> user.getUser().contains(obj.getUser())).forEach(System.out::println);//Sout 2
+				listaUsuario.stream().filter(user -> user.getUsername().contains(obj.getUsername())).forEach(System.out::println);//Sout 2
 				
 				
-				long num=listaUsuario.stream().filter(user -> user.getUser().contains(obj.getUser())).count();   
+				long num=listaUsuario.stream().filter(user -> user.getUsername().contains(obj.getUsername())).count();   
 				System.out.println("Numero printa ----------------------------\n");
 				System.out.println("El numero del stream es: "+num);
 				
