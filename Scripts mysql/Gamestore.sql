@@ -139,7 +139,7 @@ img varchar(255) not null,
  PRIMARY KEY(venId,proId)
 );
 
-select * from ProductosVenta where venId='vt004';
+select * from ProductosVenta where venId='vt001';
 insert into ProductosVenta values('vt001','vj001','prodcut1',20.99,2,'pv','urlimagen');
 insert into ProductosVenta values('vt001','vj002','prodcut1',20.99,2,'pv','urlimagen');
 

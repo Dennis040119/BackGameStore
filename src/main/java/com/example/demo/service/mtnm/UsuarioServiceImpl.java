@@ -32,7 +32,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public Optional<Usuario> BuscarPorUser(String user) {
 		// TODO Auto-generated method stub
-		return repository.findbyUser(user);
+		return repository.BuscarXUser(user);
 	}
 
 	@Override

@@ -90,10 +90,14 @@ public class UsuarioController {
 		
 		
 		Optional<Usuario> usu = service.BuscarPorUser(user);
+		System.out.println(usu.get());
+		
 		if(usu.isPresent() && PassGenerator.desecryp(pass,usu.get().getPassword())) {
+			System.out.println("paso");
 			lista.add(usu);
 			return lista ;
 		}else {
+			System.out.println("no paso");
 			return lista;
 		}
 		
@@ -154,19 +158,15 @@ public class UsuarioController {
 			try {
 				
 				
-				System.out.println("Segunda printa ----------------------------\n");
-				listaUsuario.stream().filter(user -> user.getUsername().contains(obj.getUsername())).forEach(System.out::println);//Sout 2
 				
 				
-				long num=listaUsuario.stream().filter(user -> user.getUsername().contains(obj.getUsername())).count();   
-				System.out.println("Numero printa ----------------------------\n");
-				System.out.println("El numero del stream es: "+num);
+				long num=listaUsuario.stream().filter(user -> user.getUsername().equals(obj.getUsername())).count();   
+				
 				
 				if(usu.isPresent() ) {
 					
 					if(num==0) {
-						System.out.println("El objeto a actulizar: "+obj);
-						System.out.println(obj.toString());
+						
 						obj.setPassword(PassGenerator.CrearContra(obj.getPassword()));
 						service.save(obj);
 						salida.put("mensaje", "Actualizado usuario correctamente");

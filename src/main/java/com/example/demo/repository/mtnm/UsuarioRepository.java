@@ -23,6 +23,9 @@ public interface UsuarioRepository extends JpaRepository<Usuario,String> {
 	 
 	 @Query("from Usuario t where t.estado = 'ac' ")
 	 public List<Usuario> ListarUsuariosActivos();
+	 
+	 @Query("from Usuario t where t.username = :username and t.estado = 'ac' ")
+	 Optional<Usuario> BuscarXUser(@Param("username") String username);
 	
 	 @Procedure(name = "eliminarUsuario")
 	 void eliminarUsuario(@Param("id") String nombreUsuario);
