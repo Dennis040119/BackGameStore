@@ -98,7 +98,7 @@ FOREIGN KEY (genero) REFERENCES genero(genId)
 );
 insert into Videojuego values ('vj001','Gears of war 2',20.99,'odsauhfodsiuhfkhdasofhdsofhsoiahfoaihfoiash','pf001,pf002','ge001','vj','../../assets/GearsOfWar2.jpg');
 insert into Videojuego values ('vj002','Infinity',15.99,'odsauhfodsiuhfkhdasofhdsofhsoiahfoaihfoiash','pf001','ge001','vj','../../assets/Destiny.jpg');
-use gamestore
+use gamestore;
 Select c.vjid,c.nombre,c.precio,g.nombre as 'Genero',c.plataformas from Videojuego c inner join genero g on c.genero=g.genId ; 
 Select * from Videojuego where nombre like 'gears Of War 2'; 
 /**********************************************************/
@@ -156,7 +156,7 @@ vcid varchar(20) primary key,
 nombre varchar(50) not null,
 plataforma  varchar(5) not null,
 precio double not null,
-descripcion varchar(50),
+descripcion varchar(300),
 marca varchar(20),
 rol varchar(2),
 img varchar(100),

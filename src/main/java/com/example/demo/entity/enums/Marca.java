@@ -34,6 +34,8 @@ public class Marca {
 		listas.add(new Marca("mc002","MicroSoft"));
 		listas.add(new Marca("mc003","Steam"));
 		listas.add(new Marca("mc004","Nintendo"));
+		listas.add(new Marca("mc005","Antiguo"));
+		listas.add(new Marca("mc006","Otros"));
 		
 		
 		
