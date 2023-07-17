@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
+import java.util.Optional;import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -45,9 +46,9 @@ public class UsuarioController {
 	
 	@GetMapping("/usuarioAcList")
 	@ResponseBody
-	public ResponseEntity<List<Usuario>> listaUsuarioActivos() {
+	public List<Usuario> listaUsuarioActivos() {
 		List<Usuario> lista = service.listarActivos();
-		return ResponseEntity.ok(lista);
+		return lista.stream().filter(u -> u.getEstado().equals("ac")).collect(Collectors.toList());
 	}
 	
 	@GetMapping("/usuarioxUser/{user}")
