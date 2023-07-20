@@ -2,8 +2,11 @@ package com.example.demo.controllers.mtnm;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Map;
 
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -60,7 +63,15 @@ public class MediaController {
 		@GetMapping("/file/{filename:.+}/{dirFile}") 
 		public ResponseEntity<Resource> getFile(@PathVariable String filename,@PathVariable String dirFile) throws IOException{
 			
-			Resource file = storageService.loadAsResource(filename,dirFile);
+			Resource file;
+			
+			try{
+			 file = storageService.loadAsResource(filename,dirFile);
+			
+			if(!file.exists()) {
+				Path defaultImagePath = Paths.get("mediafiles/utils/noImage.jpg");
+			 file = new FileSystemResource(defaultImagePath);
+			}
 			
 			String contentType = Files.probeContentType(file.getFile().toPath());
 			
@@ -69,6 +80,19 @@ public class MediaController {
 					.header(HttpHeaders.CONTENT_TYPE,contentType)
 					.body(file);
 			
+			}catch(IOException e) {
+				
+				
+		          // Si el archivo no existe, carga la imagen por defecto y retorna
+		         Path defaultImagePath = Paths.get("mediafiles/utils/noImage.jpg");
+		         file = new FileSystemResource(defaultImagePath);
+		        
+				String contentType = Files.probeContentType(file.getFile().toPath());
+				return ResponseEntity
+						.ok()
+						.header(HttpHeaders.CONTENT_TYPE,contentType)
+						.body(file);
+			}
 		}
 
 }
