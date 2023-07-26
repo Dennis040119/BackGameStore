@@ -4,13 +4,16 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -94,5 +97,27 @@ public class MediaController {
 						.body(file);
 			}
 		}
-
+		
+		@CrossOrigin(origins= {"http://localhost:4200"})
+		@DeleteMapping("/delfile/{filename:.+}/{dirFile}") 
+		public  ResponseEntity<Map<String, Object>> deleteFile(@PathVariable String filename, @PathVariable String dirFile) {
+			
+			Map<String, Object> salida = new HashMap<>();
+	        try {
+	            if (storageService.deleteFile(filename, dirFile)) {
+	            	
+	            	salida.put("mensaje", "Imagen eliminada correctamente");
+	               
+	            } else {
+	            	
+	            	salida.put("mensaje", "Imagen no encontrada");
+	                
+	            }
+	        } catch (IOException e) {
+	        	salida.put("mensaje", "Error al eliminar: "+e);
+	            
+	        }
+	        
+	        return ResponseEntity.ok(salida);
+	    }
 }

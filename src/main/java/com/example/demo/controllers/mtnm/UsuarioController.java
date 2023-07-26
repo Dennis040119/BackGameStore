@@ -157,13 +157,7 @@ public class UsuarioController {
 			listaUsuario.remove(usu.get());
 			
 			try {
-				
-				
-				
-				
 				long num=listaUsuario.stream().filter(user -> user.getUsername().equals(obj.getUsername())).count();   
-				
-				
 				if(usu.isPresent() ) {
 					
 					if(num==0) {

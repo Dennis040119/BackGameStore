@@ -9,7 +9,7 @@ public class PassGenerator {
 	    BCrypt cripto = new BCrypt();
 	    
 	    
-		System.out.println(PassGenerator.desecryp("123","$2a$04$OjlnIgmPxgIcgERyt.hioOw08LOdCuVJieaVg3jhYQjY1TU00yUVS"));
+		System.out.println(PassGenerator.desecryp("123","$2a$04$p9LI0cX5D/52dYHSG5NaE.kcaR.80tt94QwMgoMaFLs7Mutj2uSXS"));
 		
 	    }
 	 

@@ -142,4 +142,10 @@ public class StorageServiceImpl implements StorageService {
 				}
 	}
 
+	@Override
+	public boolean deleteFile(String filename, String dirFile)throws IOException {
+		  Path filePath = Paths.get(mediaLocation, dirFile, filename);
+	       return Files.deleteIfExists(filePath);
+	}
+
 }

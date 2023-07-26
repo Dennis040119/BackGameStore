@@ -17,5 +17,7 @@ public interface StorageService {
 		
 		
 		Resource loadAsResource(String filename,String dirFile);
+		
+		boolean deleteFile(String filename, String dirFile) throws IOException;
 
 }

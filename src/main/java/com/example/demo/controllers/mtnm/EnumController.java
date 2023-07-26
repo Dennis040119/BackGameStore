@@ -7,7 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,6 +17,7 @@ import com.example.demo.entity.enums.Genero;
 import com.example.demo.entity.enums.Marca;
 import com.example.demo.entity.enums.Plataforma;
 import com.example.demo.service.mtnm.GeneroServiceImpl;
+import com.example.demo.service.mtnm.PassGenerator;
 import com.example.demo.service.mtnm.PlataformasServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -29,6 +32,15 @@ public class EnumController {
 	
 	@Autowired
 	private PlataformasServiceImpl servicePlat;
+	
+	@GetMapping("/desescrypPass")
+	@ResponseBody
+	public boolean desescrypPass(@RequestParam("passFront") String passFront,@RequestParam("bdpass") String bdpass) {
+		
+		
+		return PassGenerator.desecryp(passFront, bdpass);
+			
+	}
 	
 	@GetMapping("/PlataformaList")
 	@ResponseBody
