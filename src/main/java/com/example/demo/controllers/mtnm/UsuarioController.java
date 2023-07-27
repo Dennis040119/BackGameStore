@@ -8,6 +8,8 @@ import java.util.Optional;import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -39,9 +41,22 @@ public class UsuarioController {
 	
 	@GetMapping("/usuarioList")
 	@ResponseBody
-	public ResponseEntity<List<Usuario>> listaUsuario() {
-		List<Usuario> lista = service.listar();
-		return ResponseEntity.ok(lista);
+	public ResponseEntity<?> listaUsuario() {
+		
+		Map<String, Object> response = new HashMap<>();
+		List<Usuario> lista = null;
+		try {
+			 lista = service.listar();
+		}
+		catch(DataAccessException e) {
+			
+			response.put("mensaje", "Error al realizar la petición en la BBDD");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.INTERNAL_SERVER_ERROR);
+			
+		}	
+		
+		return new ResponseEntity<List<Usuario>>(lista, HttpStatus.OK);
 	}
 	
 	@GetMapping("/usuarioAcList")
