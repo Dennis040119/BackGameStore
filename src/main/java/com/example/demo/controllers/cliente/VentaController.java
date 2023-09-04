@@ -1,11 +1,13 @@
 package com.example.demo.controllers.cliente;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -58,6 +60,36 @@ public class VentaController {
 		} catch (Exception e) {
 			System.out.println("El error es: "+e);
 			return new Venta();
+		
+
+		}
+	}
+	
+	@GetMapping("/VtUser/{userId}")
+	@ResponseBody
+	public ResponseEntity<List<Venta>> BuscarPorUser(@PathVariable("userId") String userId) {
+		
+		//encrypto
+		List<Venta> lista = new ArrayList<>();
+		
+		try {
+			
+			lista=service.listarVentas();
+			
+			lista.stream()
+			 .filter(i -> i.getUsuario().getUserid().equals(userId))
+			 .collect(Collectors.toList())
+			 .forEach(System.out::println);
+			
+			
+			 return  ResponseEntity.ok(lista.stream()
+					 .filter(i -> i.getUsuario().getUserid().equals(userId))
+					 .collect(Collectors.toList()));
+			
+			
+		} catch (Exception e) {
+			System.out.println("El error es: "+e);
+			return ResponseEntity.ok(lista);
 		
 
 		}
