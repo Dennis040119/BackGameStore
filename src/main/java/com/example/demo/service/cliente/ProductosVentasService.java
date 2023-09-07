@@ -10,7 +10,7 @@ public interface ProductosVentasService {
 	
 	List<ProductosVenta> listarProductosVentas();
 	public Optional<ProductosVenta> buscar(ProductosVentaPk id);
-	public Optional<ProductosVenta> BuscarPorVenta(String VentaID);
+	public List<ProductosVenta> BuscarPorVenta(String VentaID);
 	public void registrar(ProductosVenta ProductoVenta);
 	public void editar(ProductosVenta ProductoVenta);
 	public void delete(ProductosVentaPk id);

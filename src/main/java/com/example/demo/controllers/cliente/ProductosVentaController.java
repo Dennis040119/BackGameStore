@@ -45,7 +45,7 @@ public class ProductosVentaController {
 	
 	@GetMapping("/PvBuscar/{venId}/{proId}")
 	@ResponseBody
-	public ProductosVenta BuscarPorId(@PathVariable("venId") String venId,@PathVariable("proId") String proId) {
+	public ProductosVenta BuscarPorVenta(@PathVariable("venId") String venId,@PathVariable("proId") String proId) {
 		
 		//encrypto
 		//List<Optional<VideoConsola>> lista = new ArrayList<>();
@@ -57,6 +57,22 @@ public class ProductosVentaController {
 		} catch (Exception e) {
 			System.out.println("El error es: "+e);
 			return new ProductosVenta();
+			}
+	}
+	
+	@GetMapping("/PvBuscarVenta/{venId}")
+	@ResponseBody
+	public ResponseEntity<List<ProductosVenta>> BuscarPorId(@PathVariable("venId") String venId) {
+		
+		//encrypto
+		//List<Optional<VideoConsola>> lista = new ArrayList<>();
+		List<ProductosVenta> lista = new ArrayList<>();
+		try {
+			 lista= service.BuscarPorVenta(venId);
+			return ResponseEntity.ok(lista);
+		} catch (Exception e) {
+			System.out.println("El error es: "+e);
+			return ResponseEntity.ok(lista);
 			}
 	}
 	

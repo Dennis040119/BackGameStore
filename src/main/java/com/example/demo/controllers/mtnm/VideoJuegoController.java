@@ -94,7 +94,7 @@ public class VideoJuegoController {
 				
 				System.out.println(obj);
 				salida.put("mensaje", "Registrado correctamente");
-			} catch (Exception e) {salida.put("mensaje", "Error al registrar: " +e);}
+			} catch (Exception e) {salida.put("mensaje", "Error al registrar videojuego: " +e);}
 			 
 			}
 		
@@ -122,7 +122,7 @@ public class VideoJuegoController {
 				service.registrar(obj);
 				System.out.println(obj);
 				salida.put("mensaje", "Actualizado correctamente");
-			} catch (Exception e) {salida.put("mensaje", "Error al actualizar: " +e);}
+			} catch (Exception e) {salida.put("mensaje", "Error al actualizar videojuego: " +e);}
 			}
 		
 		

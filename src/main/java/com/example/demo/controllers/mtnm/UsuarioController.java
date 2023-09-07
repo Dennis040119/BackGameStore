@@ -142,6 +142,7 @@ public class UsuarioController {
 				
 				
 				service.save(obj);
+				salida.put("obj", obj);
 				salida.put("mensaje", "Registrado usuario correctamente");
 			} catch (Exception e) {salida.put("mensaje", "Error al registrar: " +e);}
 		}
