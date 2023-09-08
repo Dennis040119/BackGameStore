@@ -10,8 +10,18 @@ import javax.persistence.Table;
 
 import com.example.demo.entity.mtnm.Usuario;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Entity
 @Data
 @Table(name="Venta")
@@ -31,6 +41,7 @@ public class Venta {
 	private String rol;
 	private Date fCompra;
 	private Date fEntrega;
+	private String horaEntrega;
 	
 	
 	public Venta(String venId, Usuario usuario, String nombre, String correo, String movil, String tarjeta,
@@ -48,9 +59,7 @@ public class Venta {
 		this.fCompra = fCompra;
 		this.fEntrega = fEntrega;
 	}
-	public Venta() {
-		super();
-	}
+	
 	public String getVenId() {
 		return venId;
 	}

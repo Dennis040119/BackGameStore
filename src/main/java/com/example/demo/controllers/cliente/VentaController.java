@@ -105,7 +105,7 @@ public class VentaController {
 		objFail.setVenId("0000");
 		
 		//Intentamos la transaccion
-		if( (service.buscar(obj.getVenId()) ).isPresent()  ) {
+		if( service.buscar(obj.getVenId()).equals(new Venta())  ) {
 			
 			return objFail;
 			
@@ -122,10 +122,12 @@ public class VentaController {
 				LocalDate ld=LocalDate.now();
 				obj.setfCompra(ldToDate(ld));
 				
+				System.out.println(obj.toString());
 				service.registrar(obj);
 				return obj;
 				//salida.put("mensaje", "Registrado correctamente");
-			} catch (Exception e) {e.printStackTrace();return objFail;
+			} catch (Exception e) {System.out.println("Error al registrar: "+e);
+			return objFail;
 			}
 			 
 			}
@@ -151,7 +153,7 @@ public class VentaController {
 				obj.setRol(Rol.VENTA.getCodigo());
 				LocalDate ld=LocalDate.now();
 				
-				obj.setfCompra(ldToDate(ld));
+				//obj.setFCompra(ldToDate(ld));
 				service.registrar(obj);
 				
 				salida.put("mensaje", "Actualizado correctamente");

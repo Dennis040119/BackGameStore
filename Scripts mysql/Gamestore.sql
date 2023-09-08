@@ -110,16 +110,17 @@ usuario varchar(20) not null,
 nombre varchar(100) not null,
 correo varchar(50) not null,
 movil varchar(9),
-tarjeta varchar(16),
+tarjeta varchar(16) not null,
 total double not null,
 direccion varchar(100) not null,
 rol char(2) not null ,
 fCompra date not null,
 fEntrega date not null,
+horaEntrega varchar(6) not null,
 FOREIGN KEY (usuario) REFERENCES usuario(userid)
 );
 SET TIME_ZONE='+00:00';
-insert into Venta values('vt001','us001',"Jose jose","correo@gmail.com","999888777","1111444433332222",100,'direcionventa1','vt','2023/06/19','2023/07/01');
+insert into Venta values('vt002','us001',"Jose jose","correo@gmail.com","999888777","1111444433332222",100,'direcionventa1','vt','2023-06-19','2023-07-01','16:30');
 insert into Venta values('vt002','us001',"Jose maria","correo@gmail.com","999888777","1111444433332222",100,'direcionventa1','vt','2023/06/19','2023/07/01');
 
 select * from Venta;
@@ -130,7 +131,7 @@ drop table if exists ProductosVenta;
 create table ProductosVenta(
 venId varchar(5) ,
 proId varchar(5) ,
-nombre varchar(20) not null,
+nombre varchar(80) not null,
 precio double not null,
 cantidad double not null,
 rol char(2) not null ,

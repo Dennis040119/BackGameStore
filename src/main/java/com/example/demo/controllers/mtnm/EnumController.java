@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entity.enums.Genero;
 import com.example.demo.entity.enums.Marca;
 import com.example.demo.entity.enums.Plataforma;
+import com.example.demo.security.PassGenerator;
 import com.example.demo.service.mtnm.GeneroServiceImpl;
-import com.example.demo.service.mtnm.PassGenerator;
 import com.example.demo.service.mtnm.PlataformasServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.mtnm.Usuario;
-import com.example.demo.service.mtnm.PassGenerator;
+import com.example.demo.security.PassGenerator;
 import com.example.demo.service.mtnm.UsuarioServiceImpl;
 
 
