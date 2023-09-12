@@ -35,7 +35,7 @@ public class EnumController {
 	
 	@GetMapping("/desescrypPass")
 	@ResponseBody
-	public boolean desescrypPass(@RequestParam("passFront") String passFront,@RequestParam("bdpass") String bdpass) {
+	public boolean desescrypPass(@RequestParam String passFront,@RequestParam String bdpass) {
 		
 		
 		return PassGenerator.desecryp(passFront, bdpass);

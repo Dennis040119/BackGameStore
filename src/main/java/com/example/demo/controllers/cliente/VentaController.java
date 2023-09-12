@@ -48,7 +48,7 @@ public class VentaController {
 	
 	@GetMapping("/VtBuscar/{venId}")
 	@ResponseBody
-	public Venta BuscarPorId(@PathVariable("venId") String venId) {
+	public Venta BuscarPorId(@PathVariable String venId) {
 		
 		//encrypto
 		//List<Optional<VideoConsola>> lista = new ArrayList<>();
@@ -67,7 +67,7 @@ public class VentaController {
 	
 	@GetMapping("/VtUser/{userId}")
 	@ResponseBody
-	public ResponseEntity<List<Venta>> BuscarPorUser(@PathVariable("userId") String userId) {
+	public ResponseEntity<List<Venta>> BuscarPorUser(@PathVariable String userId) {
 		
 		//encrypto
 		List<Venta> lista = new ArrayList<>();

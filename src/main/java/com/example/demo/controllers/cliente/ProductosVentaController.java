@@ -45,7 +45,7 @@ public class ProductosVentaController {
 	
 	@GetMapping("/PvBuscar/{venId}/{proId}")
 	@ResponseBody
-	public ProductosVenta BuscarPorVenta(@PathVariable("venId") String venId,@PathVariable("proId") String proId) {
+	public ProductosVenta BuscarPorVenta(@PathVariable String venId,@PathVariable String proId) {
 		
 		//encrypto
 		//List<Optional<VideoConsola>> lista = new ArrayList<>();
@@ -62,7 +62,7 @@ public class ProductosVentaController {
 	
 	@GetMapping("/PvBuscarVenta/{venId}")
 	@ResponseBody
-	public ResponseEntity<List<ProductosVenta>> BuscarPorId(@PathVariable("venId") String venId) {
+	public ResponseEntity<List<ProductosVenta>> BuscarPorId(@PathVariable String venId) {
 		
 		//encrypto
 		//List<Optional<VideoConsola>> lista = new ArrayList<>();
@@ -131,8 +131,8 @@ public class ProductosVentaController {
 	
 	@DeleteMapping("/PvDelete/{venId}/{pvId}")
 	@ResponseBody
-	public  ResponseEntity<Map<String, Object>> eliminarVJ(@PathVariable ("venId") String venId,
-			@PathVariable ("pvId") String pvId) {
+	public  ResponseEntity<Map<String, Object>> eliminarVJ(@PathVariable String venId,
+            @PathVariable String pvId) {
 		
 		//CREAMOS UN MAP, QUE ALMACENARA LOS MENSAJES DE EXITOS O ERRORES
 		Map<String, Object> salida = new HashMap<>();

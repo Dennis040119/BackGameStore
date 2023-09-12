@@ -54,7 +54,7 @@ public class VideoJuegoController {
 	
 	@GetMapping("/vjBuscar/{id}")
 	@ResponseBody
-	public List<Optional<Videojuego>> VcXid(@PathVariable("id") String id) {
+	public List<Optional<Videojuego>> VcXid(@PathVariable String id) {
 		
 		//encrypto
 		List<Optional<Videojuego>> lista = new ArrayList<>();
@@ -133,7 +133,7 @@ public class VideoJuegoController {
 	
 	@DeleteMapping("/videoJuegoDelete/{id}")
 	@ResponseBody
-	public  ResponseEntity<Map<String, Object>> eliminarVJ(@PathVariable("id") String id) {
+	public  ResponseEntity<Map<String, Object>> eliminarVJ(@PathVariable String id) {
 		
 		//CREAMOS UN MAP, QUE ALMACENARA LOS MENSAJES DE EXITOS O ERRORES
 		Map<String, Object> salida = new HashMap<>();

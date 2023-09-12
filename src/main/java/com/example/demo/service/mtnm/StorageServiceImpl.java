@@ -27,7 +27,7 @@ public class StorageServiceImpl implements StorageService {
 	private String mediaLocation;
 
 	@Override
-	@javax.annotation.PostConstruct
+	@jakarta.annotation.PostConstruct
 	public void init() throws IOException {
 		//Inicializamos la ruta raiz de almacenamiento
 				

@@ -13,7 +13,7 @@ email varchar(80),
 tarjetaCredito varchar(16),
 direccion varchar(100),
 estado varchar(2) not null,
-rol varchar(6) not null
+rol varchar(10) not null
 );
 
 insert into usuario values('us001','user1','pass1','123@gmail.com','1234123412341234','jr algo 1234','ac','admin');

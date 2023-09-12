@@ -44,7 +44,7 @@ public class VideoConsolaController {
 	
 	@GetMapping("/vcBuscar/{id}")
 	@ResponseBody
-	public List<Optional<VideoConsola>> VcXid(@PathVariable("id") String id) {
+	public List<Optional<VideoConsola>> VcXid(@PathVariable String id) {
 		
 		//encrypto
 		List<Optional<VideoConsola>> lista = new ArrayList<>();
@@ -123,7 +123,7 @@ public class VideoConsolaController {
 	
 	@DeleteMapping("/VcDelete/{id}")
 	@ResponseBody
-	public  ResponseEntity<Map<String, Object>> eliminarVJ(@PathVariable("id") String id) {
+	public  ResponseEntity<Map<String, Object>> eliminarVJ(@PathVariable String id) {
 		
 		//CREAMOS UN MAP, QUE ALMACENARA LOS MENSAJES DE EXITOS O ERRORES
 		Map<String, Object> salida = new HashMap<>();

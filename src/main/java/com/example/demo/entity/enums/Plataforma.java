@@ -1,18 +1,22 @@
 package com.example.demo.entity.enums;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "plataforma")
 public class Plataforma {
@@ -27,31 +31,7 @@ public class Plataforma {
 	
 	
 	
-	public Plataforma(String platId, String nombre, int generacion, String marca) {
-		super();
-		this.platId = platId;
-		this.nombre = nombre;
-		this.generacion = generacion;
-		this.marca = marca;
-	}
-
 	
-
-
-
-	public Plataforma() {
-		super();
-	}
-
-	
-
-
-
-	
-
-
-
-
 
 	public String getPlatId() {
 		return platId;

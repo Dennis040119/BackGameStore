@@ -34,7 +34,7 @@ import lombok.AllArgsConstructor;
 public class MediaController {
 	
 	private final StorageService storageService;
-	private final javax.servlet.http.HttpServletRequest request;
+	private final jakarta.servlet.http.HttpServletRequest request;
 	
 	//ESTE MÉTODO SIRVE PARA SUBIR ARCHIVOS DE CUALQUIER TIPO Y RETORNA EN UN MAP
 		//LA URL FINAL DEL ARCHIVO SUBIDO PARA SU POSTERIOR CONSULTA

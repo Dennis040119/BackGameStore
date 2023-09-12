@@ -68,7 +68,7 @@ public class UsuarioController {
 	
 	@GetMapping("/usuarioxUser/{user}")
 	@ResponseBody
-	public List<Optional<Usuario>> usuarioxUser(@PathVariable("user") String user) {
+	public List<Optional<Usuario>> usuarioxUser(@PathVariable String user) {
 		
 		//encrypto
 		List<Optional<Usuario>> lista = new ArrayList<>();
@@ -95,8 +95,8 @@ public class UsuarioController {
 	
 	@GetMapping("/loginFind/{user}/{pass}")
 	@ResponseBody
-	public List<Optional<Usuario>> login(@PathVariable("user") String user,
-			@PathVariable("pass") String pass) {
+	public List<Optional<Usuario>> login(@PathVariable String user,
+            @PathVariable String pass) {
 		
 		//encrypto
 	
@@ -200,7 +200,7 @@ public class UsuarioController {
 	
 	@DeleteMapping("/UsuarioDelete/{id}")
 	@ResponseBody
-	public  ResponseEntity<Map<String, Object>> eliminarVJ(@PathVariable("id") String id) {
+	public  ResponseEntity<Map<String, Object>> eliminarVJ(@PathVariable String id) {
 		
 		//CREAMOS UN MAP, QUE ALMACENARA LOS MENSAJES DE EXITOS O ERRORES
 		Map<String, Object> salida = new HashMap<>();

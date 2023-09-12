@@ -3,7 +3,11 @@ package com.example.demo.security;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.mtnm.Usuario;
@@ -13,11 +17,12 @@ import lombok.var;
 
 
 
-//@Service
-//public class JWTUserDetailsService implements UserDetailsService {
-public class JWTUserDetailsService  {
+
+@Service
+public class JWTUserDetailsService implements UserDetailsService {
+
 	@Autowired
-	private UsuarioService service;
+	private UsuarioService usuarioDAO;
 	
 	/*
 	 * Tenemos anotado un objeto de la clase UserDetailsService como @Servicio
@@ -28,23 +33,31 @@ public class JWTUserDetailsService  {
 	 * va a actuar como usuario y consigue realizar el proceso de autenticación.
 	 * */
 	
-	/*
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
+		Usuario usu = new Usuario(); 
+		return usuarioDAO.BuscarPorUser(username).map(usuario ->{
 		
-		return service.BuscarPorUser(username).map(usuario ->{
-			
 			//Si la BBDD devuelve un solo valor de un campo "rol" de la BBDD
 			var authorities = List.of(new SimpleGrantedAuthority(usuario.getRol()));
+			
+			//Si la BBDD devuelve un set o un list...es decir varios roles...
+			/*var roles = usuario.getRoles();//Existiendo en la tabla de usuarios una relación de muchos a muchos con la tabla roles
+			var authorities = roles.stream()
+					.map(rol -> new SimpleGrantedAuthority(rol.getName())
+					.collect(Collectors.toList()));*/
+				
+			
+			usu.setUsername(usuario.getUsername());
+			usu.setPassword(usuario.getPassword());
+			usu.setRol(usuario.getRol());
 			//User extiende UserDetails 
 			return new User(usuario.getUsername(),usuario.getPassword(),authorities);
 			
-		}).orElseThrow(()->new UsernameNotFoundException("Usuario no encontrado en la BBDD"));
+		}).orElseThrow(()->new UsernameNotFoundException("Usuario no encontrado en la BBDD: "+usu.toString()));
 		
 		
 	}
-	
-	*/
 
 }
