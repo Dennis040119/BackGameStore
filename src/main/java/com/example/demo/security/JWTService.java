@@ -38,8 +38,6 @@ public class JWTService {
 		
 		//Creamos una llave partiendo del JWT_SECRET
 		final Key key = Keys.hmacShaKeyFor(JWT_SECRET.getBytes(StandardCharsets.UTF_8));
-		
-		
 	
 		//Vamos a realizar el proceso inverso a la creación del token
 		return Jwts
@@ -120,19 +118,15 @@ public class JWTService {
 	
 	public String generateToken(UserDetails userDetails) {
 		
-		/* //final Map<String,Object> claims = Collections.singletonMap("ROLES",userDetails.getAuthorities().toString());
-		final Map<String,Object> claims = Collections.singletonMap("Usuario",userDetails.getUsername().toString());
+		//final Map<String,Object> claims = Collections.singletonMap("ROLES",userDetails.getAuthorities().toString());
+		
+		final Map<String,Object> claims = new HashMap<>();
+		claims.put("ROLES",userDetails.getAuthorities().toString());
+		claims.put("usuario","un usuario cualquiera");
+	
+		 
+		
 		//Es aquí donde podríamos pasar datos en el el objeto claims del token que estamos creando
-		
-		//Map<String,Object> claims = Map.of();
-		//claims.put("ROLES",userDetails.getAuthorities().toString());
-		//claims.put("Usuario", userDetails.getUsername());
-		return this.getToken(claims, userDetails.getUsername());*/
-		
-		
-		final Map<String, Object> claims = new HashMap<>();
-		claims.put("Usuario", userDetails.getUsername());
-		claims.put("ROLES", userDetails.getAuthorities().toString());
 		return this.getToken(claims, userDetails.getUsername());
 	
 	}
