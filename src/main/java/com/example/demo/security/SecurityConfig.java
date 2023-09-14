@@ -42,10 +42,12 @@ public class SecurityConfig {
 			
 			//auth.anyRequest().hasRole("USER");//Es obligatorio para spring que en la bbdd este anotado como "ROLE_'LOQUESEA'"
 			//y aqui "LOQUESEA"
-			auth.requestMatchers("usuario/usuarioList").hasRole("ADMIN");
-			auth.requestMatchers("videojuego/videoJuegoList").authenticated();
+			//auth.requestMatchers("usuario/usuarioList").hasRole("ADMIN");
 			auth.requestMatchers("/authenticate").permitAll();
+			auth.requestMatchers("usuario/*").authenticated();
 			auth.anyRequest().permitAll();
+			
+			
 			
 				
 			
