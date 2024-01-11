@@ -7,14 +7,14 @@ import jakarta.persistence.Embeddable;
 @Embeddable
 public class ProductosVentaPk implements Serializable {
 
-	private String venId;
-	private String proId;
+	private String venid;
+	private String proid;
 	
 	
 	public ProductosVentaPk(String venId, String proId) {
 		super();
-		this.venId = venId;
-		this.proId = proId;
+		this.venid = venId;
+		this.proid = proId;
 	}
 
 	
@@ -24,28 +24,28 @@ public class ProductosVentaPk implements Serializable {
 
 
 	public String getVenId() {
-		return venId;
+		return venid;
 	}
 
 
 	public void setVenId(String venId) {
-		this.venId = venId;
+		this.venid = venId;
 	}
 
 
 	public String getProId() {
-		return proId;
+		return proid;
 	}
 
 
 	public void setProId(String proId) {
-		this.proId = proId;
+		this.proid = proId;
 	}
 
 
 	@Override
 	public String toString() {
-		return "ProductosVentaPk [venId=" + venId + ", proId=" + proId + "]";
+		return "ProductosVentaPk [venId=" + venid + ", proId=" + proid + "]";
 	}
 	
 	

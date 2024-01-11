@@ -22,7 +22,7 @@ import lombok.ToString;
 public class Plataforma {
 	
 	@Id
-	private String platId;
+	private String platid;
 	private String nombre;
 	private int generacion;
 	private String marca;
@@ -34,7 +34,7 @@ public class Plataforma {
 	
 
 	public String getPlatId() {
-		return platId;
+		return platid;
 	}
 
 
@@ -42,7 +42,7 @@ public class Plataforma {
 
 
 	public void setPlatId(String platId) {
-		this.platId = platId;
+		this.platid = platId;
 	}
 
 
@@ -99,7 +99,7 @@ public class Plataforma {
 
 	@Override
 	public String toString() {
-		return "Plataforma [platId=" + platId + ", nombre=" + nombre + ", generacion=" + generacion + ", marca=" + marca
+		return "Plataforma [platId=" + platid + ", nombre=" + nombre + ", generacion=" + generacion + ", marca=" + marca
 				+ "]";
 	}
 

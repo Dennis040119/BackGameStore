@@ -23,7 +23,7 @@ public class Usuario {
 	private String username;
 	private String password;
 	private String email;
-	private String tarjetaCredito;
+	private String tarjetacredito;
 	private String direccion;
 	private String estado;
 	private String rol;
@@ -99,14 +99,14 @@ public class Usuario {
 
 
 	public String getTarjetaCredito() {
-		return tarjetaCredito;
+		return tarjetacredito;
 	}
 
 
 
 
 	public void setTarjetaCredito(String tarjetaCredito) {
-		this.tarjetaCredito = tarjetaCredito;
+		this.tarjetacredito = tarjetaCredito;
 	}
 
 

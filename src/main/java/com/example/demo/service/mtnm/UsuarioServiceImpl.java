@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.mtnm.Usuario;
+import com.example.demo.repository.mtnm.UsuarioRepository;
 
 
 
@@ -15,7 +16,7 @@ import com.example.demo.entity.mtnm.Usuario;
 public class UsuarioServiceImpl implements UsuarioService {
 
 	@Autowired
-	private com.example.demo.repository.mtnm.UsuarioRepository repository;
+	private UsuarioRepository repository;
 
 	@Override
 	public List<Usuario> listar() {

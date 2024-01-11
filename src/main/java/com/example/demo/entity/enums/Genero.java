@@ -12,7 +12,7 @@ import lombok.Data;
 public class Genero {
 	
 	@Id
-	private String genId;
+	private String genid;
 	private String nombre;
 	
 	
@@ -21,17 +21,17 @@ public class Genero {
 	}
 	public Genero(String genId, String nombre) {
 		super();
-		this.genId = genId;
+		this.genid = genId;
 		this.nombre = nombre;
 	}
 	
 	
 	
 	public String getGenId() {
-		return genId;
+		return genid;
 	}
 	public void setGenId(String genId) {
-		this.genId = genId;
+		this.genid = genId;
 	}
 	public String getNombre() {
 		return nombre;
@@ -41,7 +41,7 @@ public class Genero {
 	}
 	@Override
 	public String toString() {
-		return "Genero [genId=" + genId + ", nombre=" + nombre + "]";
+		return "Genero [genid=" + genid + ", nombre=" + nombre + "]";
 	}
 	
 	

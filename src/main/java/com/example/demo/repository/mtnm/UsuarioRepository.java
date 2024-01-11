@@ -1,15 +1,18 @@
 package com.example.demo.repository.mtnm;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.entity.mtnm.Usuario;
+
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario,String> {
@@ -29,4 +32,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario,String> {
 	
 	 @Procedure(name = "eliminarUsuario")
 	 void eliminarUsuario(@Param("id") String nombreUsuario);
+	 
+	 Optional<Usuario> findOneByUsername(String username);//DERIVED QUERY METHODS
 }

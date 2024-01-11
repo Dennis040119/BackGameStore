@@ -63,25 +63,22 @@ public class UsuarioController {
 	@ResponseBody
 	public List<Usuario> listaUsuarioActivos() {
 		List<Usuario> lista = service.listarActivos();
-		return lista.stream().filter(u -> u.getEstado().equals("ac")).collect(Collectors.toList());
-	}
+		return lista;	}
 	
 	@GetMapping("/usuarioxUser/{user}")
 	@ResponseBody
 	public List<Optional<Usuario>> usuarioxUser(@PathVariable String user) {
 		
-		//encrypto
+		//encrypt
+		
 		List<Optional<Usuario>> lista = new ArrayList<>();
+		Optional<Usuario> usu = service.BuscarPorUser(user);
 		try {
-			
-			
-			Optional<Usuario> usu = service.BuscarPorUser(user);
+					
 			if(usu.isPresent()) {
 				lista.add(usu);
-				return lista ;
-			}else {
 				return lista;
-			}
+			}else {return lista;}
 		} catch (Exception e) {
 			
 			e.printStackTrace();
@@ -95,26 +92,38 @@ public class UsuarioController {
 	
 	@GetMapping("/loginFind/{user}/{pass}")
 	@ResponseBody
-	public List<Optional<Usuario>> login(@PathVariable String user,
+	public List<Usuario> login(@PathVariable String user,
             @PathVariable String pass) {
 		
 		//encrypto
 	
-		
-	
 		List<Optional<Usuario>> lista = new ArrayList<>();
+		Optional<Usuario> usu = java.util.Optional.empty();
+		
+		//Opcion 1
+		if(service.BuscarPorUser(user).isPresent()) {
+			 usu = service.BuscarPorUser(user);
+		}
+		
+		//opcion2
+		List<Usuario> lista2= new ArrayList<>();
+		 lista2= listaUsuarioActivos().stream().
+				 filter( a -> a.getUsername()==user)
+				 .collect(Collectors.toList());
 		
 		
-		Optional<Usuario> usu = service.BuscarPorUser(user);
+		
 		System.out.println(usu.get());
 		
 		if(usu.isPresent() && PassGenerator.desecryp(pass,usu.get().getPassword())) {
 			System.out.println("paso");
 			lista.add(usu);
-			return lista ;
+			return listaUsuarioActivos().stream().
+					 filter( a -> a.getUsername().equals(user))
+					 .collect(Collectors.toList());
 		}else {
 			System.out.println("no paso");
-			return lista;
+			return lista2;
 		}
 		
 		

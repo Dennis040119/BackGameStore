@@ -2,12 +2,14 @@ package com.example.demo.security;
 
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,10 +18,16 @@ import lombok.AllArgsConstructor;
 
 @RestController
 @AllArgsConstructor
+@Controller
 public class AuthController {
 	
+	@Autowired
 	private final AuthenticationManager authenticationManager;
+	
+	@Autowired
 	private final JWTUserDetailsService jwtUserDetailsService;
+	
+	@Autowired
 	private final JWTService jwtService;
 	
 	@PostMapping("/authenticate")
@@ -27,7 +35,7 @@ public class AuthController {
 		
 		this.authenticate(request);
 		
-		final var userDetails = this.jwtUserDetailsService.loadUserByUsername(request.getUsername());
+		var userDetails = this.jwtUserDetailsService.loadUserByUsername(request.getUsername());
 		
 		final String token = jwtService.generateToken(userDetails);
 		

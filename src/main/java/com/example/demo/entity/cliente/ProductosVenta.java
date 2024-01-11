@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name="ProductosVenta")
+@Table(name="productosventa")
 public class ProductosVenta {
 	@EmbeddedId
 	private ProductosVentaPk productosVentaPk;

@@ -8,12 +8,14 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.controllers.mtnm.UsuarioController;
 import com.example.demo.entity.mtnm.Usuario;
-import com.example.demo.service.mtnm.UsuarioService;
+import com.example.demo.repository.mtnm.UsuarioRepository;
+import com.example.demo.service.mtnm.UsuarioServiceImpl;
 
-import lombok.var;
 
 
 
@@ -22,7 +24,7 @@ import lombok.var;
 public class JWTUserDetailsService implements UserDetailsService {
 
 	@Autowired
-	private UsuarioService usuarioDAO;
+	private UsuarioRepository usuarioDAO;
 	
 	/*
 	 * Tenemos anotado un objeto de la clase UserDetailsService como @Servicio
@@ -36,8 +38,12 @@ public class JWTUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
+		
 		Usuario usu = new Usuario(); 
-		return usuarioDAO.BuscarPorUser(username).map(usuario ->{
+		
+		
+	
+		return usuarioDAO.findOneByUsername(username).map(usuario ->{
 		
 			//Si la BBDD devuelve un solo valor de un campo "rol" de la BBDD
 			var authorities = List.of(new SimpleGrantedAuthority(usuario.getRol()));
