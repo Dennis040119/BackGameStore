@@ -19,7 +19,7 @@ import lombok.ToString;
 
 @Setter
 @Getter
-@AllArgsConstructor
+
 @NoArgsConstructor
 @ToString
 @Entity
@@ -28,7 +28,7 @@ import lombok.ToString;
 public class Venta {
 	
 	@Id
-	private String venId;
+	private String venid;
 	@ManyToOne
 	@JoinColumn(name = "usuario")
 	private Usuario usuario;
@@ -39,15 +39,15 @@ public class Venta {
 	private double total;
 	private String direccion;
 	private String rol;
-	private Date fCompra;
-	private Date fEntrega;
-	private String horaEntrega;
+	private Date fcompra;
+	private Date fentrega;
+	
 	
 	
 	public Venta(String venId, Usuario usuario, String nombre, String correo, String movil, String tarjeta,
 			double total, String direccion, String rol, Date fCompra, Date fEntrega) {
 		super();
-		this.venId = venId;
+		this.venid = venId;
 		this.usuario = usuario;
 		this.nombre = nombre;
 		this.correo = correo;
@@ -56,15 +56,15 @@ public class Venta {
 		this.total = total;
 		this.direccion = direccion;
 		this.rol = rol;
-		this.fCompra = fCompra;
-		this.fEntrega = fEntrega;
+		this.fcompra = fCompra;
+		this.fentrega = fEntrega;
 	}
 	
 	public String getVenId() {
-		return venId;
+		return venid;
 	}
 	public void setVenId(String venId) {
-		this.venId = venId;
+		this.venid = venId;
 	}
 	public Usuario getUsuario() {
 		return usuario;
@@ -115,22 +115,22 @@ public class Venta {
 		this.rol = rol;
 	}
 	public Date getfCompra() {
-		return fCompra;
+		return fcompra;
 	}
 	public void setfCompra(Date fCompra) {
-		this.fCompra = fCompra;
+		this.fcompra = fCompra;
 	}
 	public Date getfEntrega() {
-		return fEntrega;
+		return fentrega;
 	}
 	public void setfEntrega(Date fEntrega) {
-		this.fEntrega = fEntrega;
+		this.fentrega = fEntrega;
 	}
 	@Override
 	public String toString() {
-		return "Venta [venId=" + venId + ", usuario=" + usuario + ", nombre=" + nombre + ", correo=" + correo
+		return "Venta [venId=" + venid + ", usuario=" + usuario + ", nombre=" + nombre + ", correo=" + correo
 				+ ", movil=" + movil + ", tarjeta=" + tarjeta + ", total=" + total + ", direccion=" + direccion
-				+ ", rol=" + rol + ", fCompra=" + fCompra + ", fEntrega=" + fEntrega + "]";
+				+ ", rol=" + rol + ", fCompra=" + fcompra + ", fEntrega=" + fentrega + "]";
 	}
 	
 	

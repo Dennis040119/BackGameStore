@@ -14,6 +14,8 @@ public interface UsuarioService {
 	public Optional<Usuario> buscar(String id);
 	public Optional<Usuario> BuscarPorUser(String id);
 	public void save(Usuario Usuario);
+	public void Actualizar(Usuario Usuario);
+
 	
 	public void delete(String id);
 

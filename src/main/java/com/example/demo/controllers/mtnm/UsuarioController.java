@@ -97,33 +97,23 @@ public class UsuarioController {
 		
 		//encrypto
 	
-		List<Optional<Usuario>> lista = new ArrayList<>();
-		Optional<Usuario> usu = java.util.Optional.empty();
+		List<Usuario> lista = new ArrayList<>();
+		Usuario usu = new Usuario() ;
 		
 		//Opcion 1
 		if(service.BuscarPorUser(user).isPresent()) {
-			 usu = service.BuscarPorUser(user);
+			 usu = service.BuscarPorUser(user).get();
 		}
+
+		System.out.println(usu);
 		
-		//opcion2
-		List<Usuario> lista2= new ArrayList<>();
-		 lista2= listaUsuarioActivos().stream().
-				 filter( a -> a.getUsername()==user)
-				 .collect(Collectors.toList());
-		
-		
-		
-		System.out.println(usu.get());
-		
-		if(usu.isPresent() && PassGenerator.desecryp(pass,usu.get().getPassword())) {
+		if(PassGenerator.desecryp(pass,usu.getPassword())) {
 			System.out.println("paso");
 			lista.add(usu);
-			return listaUsuarioActivos().stream().
-					 filter( a -> a.getUsername().equals(user))
-					 .collect(Collectors.toList());
+			return lista;
 		}else {
 			System.out.println("no paso");
-			return lista2;
+			return lista;
 		}
 		
 		
@@ -167,27 +157,34 @@ public class UsuarioController {
 		
 		//CREAMOS UN MAP, QUE ALMACENARA LOS MENSAJES DE EXITOS O ERRORES
 		Map<String, Object> salida = new HashMap<>();
-		//Intentamos la transaction
 		
+		
+		//Intentamos la transaction
 		Optional<Usuario> usu = service.buscar(obj.getUserid());
 		List<Usuario> listaUsuario=service.listar();
 		
 		
-		if(usu.isEmpty()){
-			salida.put("mensaje", "No existe el Usuario");
+		if(usu.isEmpty()){salida.put("mensaje", "No existe el Usuario");}
+		
+		else {
 			
-		}else {
 			
-			usu.get().setPassword(PassGenerator.CrearContra(obj.getPassword()));
 			listaUsuario.remove(usu.get());
 			
 			try {
-				long num=listaUsuario.stream().filter(user -> user.getUsername().equals(obj.getUsername())).count();   
+				List num=listaUsuario.stream().
+						filter(user -> user.getUsername().equals(obj.getUsername())) //Filtramos el username en la lista
+						.collect(Collectors.toList()); //COnvertimos el stream a un list
 				if(usu.isPresent() ) {
 					
-					if(num==0) {
+					if(num.size()==0) {
 						
 						obj.setPassword(PassGenerator.CrearContra(obj.getPassword()));
+						if(PassGenerator.desecryp("null", obj.getPassword()) ) {
+							obj.setPassword(usu.get().getPassword());
+							
+						}else {}
+						
 						service.save(obj);
 						salida.put("mensaje", "Actualizado usuario correctamente");
 					}else {salida.put("mensaje", "Username ya se encuentra en uso");}

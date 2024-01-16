@@ -33,13 +33,19 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public Optional<Usuario> BuscarPorUser(String user) {
 		// TODO Auto-generated method stub
-		return repository.BuscarXUser(user);
+		return repository.findOneByUsername(user);
 	}
 
 	@Override
 	public void save(Usuario Usuario) {
 		repository.save(Usuario);
 
+	}
+	
+	@Override
+	public void Actualizar(Usuario Usuario) {
+		// TODO Auto-generated method stub
+		repository.save(Usuario);
 	}
 	@Override
 	public void delete(String id) {
@@ -52,6 +58,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 		// TODO Auto-generated method stub
 		return repository.findById(id);
 	}
+
+	
 
 	
 

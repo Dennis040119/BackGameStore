@@ -59,6 +59,7 @@ public class JWTUserDetailsService implements UserDetailsService {
 			usu.setPassword(usuario.getPassword());
 			usu.setRol(usuario.getRol());
 			//User extiende UserDetails 
+			System.out.println(">>>>>>>>>>"+usuarioDAO.findOneByUsername(username).get());
 			return new User(usuario.getUsername(),usuario.getPassword(),authorities);
 			
 		}).orElseThrow(()->new UsernameNotFoundException("Usuario no encontrado en la BBDD: "+usu.toString()));

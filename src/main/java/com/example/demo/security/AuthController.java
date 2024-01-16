@@ -54,10 +54,11 @@ public class AuthController {
 	private void authenticate(JWTRequest request) {
 		
 		try {
-			
+			System.out.println(">>>>>>>"+request);
 			this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(),request.getPassword()));
 			
 		}catch(BadCredentialsException e) {
+			
 			System.out.println(e);
 			throw new RuntimeException("Credenciales erroneas, usuario no registrado");
 			
